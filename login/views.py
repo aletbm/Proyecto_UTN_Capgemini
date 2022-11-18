@@ -1,13 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 def index(request):
-    return render(request, "index.html")
+    if request.POST:
+        username=request.POST["username"]
+        password=request.POST["password"]
 
+        usernameBd="admin"
+        passwordBd="1234"
 
-
-def login(request):
-    username=request.GET["username"]
-    password=request.GET["password"]
-
-    return render(request, "home/home.html", {"logged":True})
+        if username==usernameBd and password==passwordBd:
+            return redirect("/home")
+        else:
+            return render(request, "login.html", {"error":1})
+    else:
+        return render(request, "login.html")
