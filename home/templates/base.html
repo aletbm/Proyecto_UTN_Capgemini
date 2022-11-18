@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'home/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
+    {% block links %}{% endblock %}
+    <title>{% block title %} Base {% endblock %}</title>
+  </head>
+  <body>
+    <header>
+        <nav id="nav-pc">
+            <div class="nav-logo">
+                <div class="nav-logo-img">
+                    <img src="{% static 'media/home/logo.png' %}" alt="Logo">
+                </div>
+                <h4 class="nav-logo-txt">Nombre</h4>
+            </div>
+            <ul class="nav-opciones">
+                <li class="nav-opcion"><a href="">Inicio</a><div class="line-nav"></div></li>
+                <li class="nav-opcion"><a href="">Puntuaciones</a><div class="line-nav"></div></li>
+                <li class="nav-opcion"><a href="">Sobre el proyecto</a><div class="line-nav"></div></li>
+                <li class="nav-opcion"><a href="">Contacto</a><div class="line-nav"></div></li>
+            </ul>
+            <div class="nav-login">
+                <div class="nav-login-img">
+                    <img src="{% static 'media/home/log-in.png' %}" alt="">
+                </div>
+                <a href="">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mymain">
+        {% block contenido %}{% endblock %}
+    </main>
+
+    <footer>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <g class="parallax">
+            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(114,137,218,0.7)" />
+            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(114,137,218,0.5)" />
+            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(114,137,218,0.3)" />
+            <use xlink:href="#gentle-wave" x="48" y="7" fill="#7289da" />
+          </g>
+        </svg>
+        <div id="myfooter">
+            <div class="myfooter-img">
+                <img src="{% static 'media/home/logo.png'%}" alt="Logo">
+            </div>
+            <div class="myfooter-info">
+                <ul class="myfooter-info-links">
+                    <li class="myfooter-info-link"><a href="" title="Política de Privacidad">Política de Privacidad</a></li>
+                    <li class="myfooter-info-link"><a href="" title="">Gestionar Mi Perfil</a></li>
+                    <li class="myfooter-info-link"><a href="" title="Gestionar Mi Perfil">Repositorio</a></li>
+                    <li class="myfooter-info-link"><a href="" title="Legal">Legal</a></li>
+                </ul>
+                <p>©Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+  </body>
+</html>

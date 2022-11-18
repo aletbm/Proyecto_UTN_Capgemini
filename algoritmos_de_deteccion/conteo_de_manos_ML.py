@@ -1,5 +1,6 @@
 import cv2
 import mediapipe as mp
+cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
 THUMB_IP = 3
 THUMB_TIP = 4
@@ -9,8 +10,8 @@ FINGERS_TIP = [8,12,16,20]
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
-cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 finger_count = 0
+
 with mp_hands.Hands(
     static_image_mode=False,
     max_num_hands=2,
@@ -27,8 +28,10 @@ with mp_hands.Hands(
         results = hands.process(frame_rgb)
         if results.multi_hand_landmarks is not None:
             for hand_landmarks in results.multi_hand_landmarks: #Cada mano tiene 21 landmarks
+                print(hand_landmarks)
                 handIndex = results.multi_hand_landmarks.index(hand_landmarks)  #Identificador de mano
                 handLabel = results.multi_handedness[handIndex].classification[0].label     #Identificador de mano izquierda o derecha
+                
                 handLandmarks = []
 
                 # Fill list with x and y positions of each landmark
