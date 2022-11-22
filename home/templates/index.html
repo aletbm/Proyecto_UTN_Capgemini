@@ -28,7 +28,9 @@
     </div>
     <div class="answer_box">
       <h3 class="answer_title">Su respuesta es:</h3>
-      <h3 id="respuesta"></h3>
+      <div class="respuesta-box">
+        <h3 id="respuesta"></h3>
+      </div>
     </div>
   </div>
 </div>
@@ -46,6 +48,9 @@
   eventSource.onmessage = function(e) {
     console.log(e.data)
     final_data = JSON.parse(e.data)
+    if(final_data.length > 1){
+      final_data = final_data[0] + final_data[1]
+    }
     document.getElementById('respuesta').innerHTML = final_data
   }
 

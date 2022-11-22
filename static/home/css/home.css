@@ -24,6 +24,7 @@
 
 .opciones{
     flex-basis: 30%;
+    width: 100%;
 }
 
 .answer_box{
@@ -31,8 +32,7 @@
     flex-basis: 40%;
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     text-align: center;
     border-radius: 20px;
@@ -40,37 +40,38 @@
 
 .answer_title{
     color: var(--color5);
+    margin-right: 30px;
 }
 
-#respuesta{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.respuesta-box{
     background-color: var(--color5);
     height: 80px;
     width: 80px;
     border-radius: 50%;
-    color: var(--color3);
 }
 
-ol {
-    counter-reset: li; /* Initiate a counter */
-    list-style: none; /* Remove default numbering */
-    *list-style: decimal; /* Keep using default numbering for IE6/7 */
+#respuesta{
+    color: var(--color3);
+    font-size: 50px;
+    line-height: 71px;
+}
+
+ol{
+    width: 100%;
+    counter-reset: li;
+    list-style: none;
+    *list-style: decimal;
     padding: 0;
-    margin-bottom: 4em;
     text-shadow: 0 1px 0 rgba(255,255,255,.5);
-  }
+}
 
 .rounded-list li{
     position: relative;
     display: block;
-    padding: .4em .4em .4em 2em;
-    *padding: .4em;
-    margin: 1em 0;
+    padding: .4em .4em .4em 3em;
+    margin: 0.6em 0;
     background: rgb(220, 220, 220);
-    color: #444;
-    text-decoration: none;
+    color: var(--color5);
     border-radius: .3em;
 }
 
@@ -78,14 +79,14 @@ ol {
     content: counter(li);
     counter-increment: li;
     position: absolute;
-    left: -1.3em;
-    top: 50%;
+    left: -0.5em;
+    top: 60%;
     margin-top: -1.3em;
     background: var(--color5);
-    height: 2em;
-    width: 2em;
-    line-height: 2em;
-    border: .3em solid rgb(220, 220, 220);
+    height: 1.5em;
+    width: 1.5em;
+    line-height: 1.4em;
+    border: .4em solid rgb(220, 220, 220);
     text-align: center;
     font-weight: bold;
     border-radius: 2em;
