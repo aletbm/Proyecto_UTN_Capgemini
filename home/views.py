@@ -4,15 +4,49 @@ from django.shortcuts import render
 import cv2
 import threading
 import mediapipe as mp
+from django.views import View
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+import time
+
 
 # Create your views here.
 @gzip.gzip_page
 def home(request):
     return render(request, "index.html")
+    # def stream(t):
+        
+    #     with open("./static/home/fingerCount.txt", "rb") as file:
+    #         data = file.read()
+    #     yield t.render({'mydata': data})
+    #     yield '<p>{}</p>\n'.format(data)
+    # t = loader.get_template('index.html')
+    # return StreamingHttpResponse(stream(t))
 
 
+def event_stream():
+    initial_data = ""
+    while True:
+        with open("./static/home/fingerCount.txt", "rb") as file:
+            text = file.read().decode("utf-8")
+        data = json.dumps(list(text), cls=DjangoJSONEncoder)
+
+        if not initial_data == data:
+            yield "\ndata: {}\n\n".format(data) 
+            initial_data = data
+        time.sleep(1)
+
+
+class StreamView(View):
+
+    def get(self, request):
+        response = StreamingHttpResponse(event_stream())
+        response['Content-Type'] = 'text/event-stream'
+        return response
+    
 class VideoCamera(object):
     def __init__(self):
+        self.finger_count = 0
         self.video = cv2.VideoCapture(0, cv2.CAP_DSHOW)
         (self.grabbed, self.frame) = self.video.read()
         threading.Thread(target=self.update, args=()).start()
@@ -66,6 +100,8 @@ class VideoCamera(object):
                         mp_drawing.DrawingSpec(color=(255,0,255), thickness=4, circle_radius=5))
                     
             cv2.putText(frame, "{}".format(finger_count), (10,30), 1, 2, (0,255,255), 1, cv2.LINE_AA)
+            self.finger_count = finger_count
+            self.get_count()
             finger_count = 0
             
         image = frame.copy()
@@ -75,6 +111,10 @@ class VideoCamera(object):
     def update(self):
         while True:
             (self.grabbed, self.frame) = self.video.read()
+            
+    def get_count(self):
+        with open("./static/home/fingerCount.txt", "w") as file:
+            file.write(str(self.finger_count))
 
 
 def gen(camera):
@@ -90,6 +130,20 @@ def gen(camera):
 
 def video(request):
     cam = VideoCamera()
+    generator = gen(cam)
     return StreamingHttpResponse(
-        gen(cam), content_type="multipart/x-mixed-replace;boundary=frame"
+        generator, content_type="multipart/x-mixed-replace;boundary=frame"
     )
+
+  
+def conteo(request):
+    def stream():
+        with open("./static/home/fingerCount.txt", "rb") as file:
+            data = file.read()
+        c = Context({'mydata': data})
+        yield t.render(c)
+            
+    t = Template('{{ mydata }} <br />\n')
+    
+    return StreamingHttpResponse(stream(t))
+    #return FileResponse(open("./static/home/fingerCount.txt", "rb"))

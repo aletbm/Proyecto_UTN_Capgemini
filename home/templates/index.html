@@ -1,7 +1,61 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
-{% block title %} Inicio {% endblock %}
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'home/css/home.css'%}">
+{% endblock %}
 
 {% block contenido %}
-<img src="{% url 'video' %}" alt="Video"  height="600px">
+<div class="game">
+  <div class="webcam">
+    <img src="{% url 'video' %}" alt="Video">
+  </div>
+  <div class="info">
+    <div class="pregunta">
+      <h3>Lorem ipsum dolor sit amet.</h3>
+    </div>
+    <div class="opciones">
+      <ol class="rounded-list">
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sapiente.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sapiente.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sapiente.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sapiente.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sapiente.</li>
+      </ol>
+    </div>
+    <div class="answer_box">
+      <h3 class="answer_title">Su respuesta es:</h3>
+      <h3 id="respuesta"></h3>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+
+  var eventSource  = new EventSource("{% url 'stream' %}");
+
+  eventSource.onopen = function() {
+    console.log('Yay! its open?');
+  }
+
+  eventSource.onmessage = function(e) {
+    console.log(e.data)
+    final_data = JSON.parse(e.data)
+    document.getElementById('respuesta').innerHTML = final_data
+  }
+
+  eventSource.onerror = function(e) {
+    console.log(`error ${e}`);
+  }
+
+  function buildPostContent(message) {
+    content = `${message}`;
+    return content
+  }
+</script>
 {% endblock %}

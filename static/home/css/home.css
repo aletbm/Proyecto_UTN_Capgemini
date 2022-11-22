@@ -1,0 +1,93 @@
+.game{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.webcam{
+    flex-basis: 50%;
+}
+
+.webcam > img{
+    height: 400px;
+}
+
+.info{
+    flex-basis: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.opciones{
+    flex-basis: 30%;
+}
+
+.answer_box{
+    background-color: var(--color2);
+    flex-basis: 40%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.answer_title{
+    color: var(--color5);
+}
+
+#respuesta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color5);
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    color: var(--color3);
+}
+
+ol {
+    counter-reset: li; /* Initiate a counter */
+    list-style: none; /* Remove default numbering */
+    *list-style: decimal; /* Keep using default numbering for IE6/7 */
+    padding: 0;
+    margin-bottom: 4em;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  }
+
+.rounded-list li{
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em 2em;
+    *padding: .4em;
+    margin: 1em 0;
+    background: rgb(220, 220, 220);
+    color: #444;
+    text-decoration: none;
+    border-radius: .3em;
+}
+
+.rounded-list li:before{
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    left: -1.3em;
+    top: 50%;
+    margin-top: -1.3em;
+    background: var(--color5);
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    border: .3em solid rgb(220, 220, 220);
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2em;
+    color:var(--color2)
+}
