@@ -1,0 +1,231 @@
+.game{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.webcam{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: calc(50% - 30px);
+    height: 100%;
+    position: relative;
+    margin-right: 30px;
+    background-color: var(--color4);
+}
+
+.webcam > img{
+    height: calc(100% - 40px);
+    width: calc(100% - 40px);
+    box-shadow: 0 0 20px var(--color5);
+    object-fit: cover;
+    position: relative;
+    z-index: 100;
+}
+
+.info{
+    flex-basis: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.opciones{
+    flex-basis: 30%;
+    width: 100%;
+}
+
+.answer_box{
+    background-color: var(--color2);
+    flex-basis: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.answer_title{
+    color: var(--color5);
+    margin-right: 30px;
+}
+
+.respuesta-box{
+    background-color: var(--color5);
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+#respuesta{
+    color: var(--color3);
+    font-size: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    line-height: 71px;
+    background-color: transparent;
+    border: none;
+    width: 75px;
+    height: 70px;
+    text-align: center;
+    outline: none;
+    cursor: default;
+}
+
+
+/* =============LIST============= */
+ol{
+    width: 100%;
+    counter-reset: li;
+    list-style: none;
+    *list-style: decimal;
+    padding: 0;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+
+.rounded-list > li{
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em 3em;
+    margin: 0.6em 0;
+    background: rgb(220, 220, 220);
+    color: var(--color5);
+    border-radius: .3em;
+}
+
+.rounded-list > li:before{
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    left: -0.5em;
+    top: 58%;
+    margin-top: -1.3em;
+    background: var(--color5);
+    height: 1.5em;
+    width: 1.5em;
+    line-height: 1.4em;
+    border: .4em solid rgb(220, 220, 220);
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2em;
+    color:var(--color2)
+}
+
+/* ================================== */
+.time{
+    background-color: var(--color5);
+    padding: 10px;
+    margin-bottom: 0.6em;
+    border-radius: .3em;
+    color: var(--color2);
+    font-size: 18px;
+}
+
+#seconds{
+    font-weight: 800;
+    background-color: var(--color4);
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.selected-option{
+    background-color: var(--color5) !important;
+    color: var(--color2) !important;
+}
+/* =============LOADING============= */
+.ring {
+    z-index: 1;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:150px;
+    height:150px;
+    background: transparent;
+    border-radius: 50%;
+    text-align:center;
+    line-height:150px;
+    font-size:18px;
+    color: var(--color1);
+    letter-spacing:5px;
+    text-transform: uppercase;
+    text-shadow:0 0 10px var(--color1);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    animation:pulse 0.5s linear infinite alternate;
+}
+
+@keyframes pulse {
+    0%{
+        color: var(--color1);
+    }
+    100%{
+        color: rgb(0, 220, 0); 
+    }
+}
+
+.ring:before
+{
+    content:'';
+    position:absolute;
+    top:-3px;
+    left:-3px;
+    width:100%;
+    height:100%;
+    border:3px solid transparent;
+    border-top:3px solid rgb(0, 220, 0);
+    border-right:3px solid rgb(0, 220, 0);
+    border-radius:50%;
+    animation:animateC 2s linear infinite;
+}
+.ring > span{
+    display:block;
+    position:absolute;
+    top:calc(50% - 2px);
+    left:50%;
+    width:50%;
+    height:4px;
+    background:transparent;
+    transform-origin:left;
+    animation:animate 2s linear infinite;
+}
+
+.ring > span:before
+{
+    content:'';
+    position:absolute;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background: rgb(0, 220, 0);
+    top:-6px;
+    right:-8px;
+    box-shadow:0 0 20px rgb(0, 220, 0);
+}
+@keyframes animateC
+{
+    0%
+    {
+    transform:rotate(0deg);
+    }
+    100%
+    {
+    transform:rotate(360deg);
+    }
+}
+@keyframes animate
+{
+    0%
+    {
+    transform:rotate(45deg);
+    }
+    100%
+    {
+    transform:rotate(405deg);
+    }
+}
