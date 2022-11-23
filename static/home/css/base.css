@@ -151,11 +151,11 @@ a::before {
 }
 
 .nav-signout{
-    width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    flex: 1
 }
 
 .nav-login:hover{
@@ -185,12 +185,6 @@ a::before {
     padding-bottom: 40px;
 }
 /* ========================FOOTER=========================== */
-
-footer{
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
 
 .waves {
     position: relative;
@@ -241,9 +235,9 @@ footer{
 }
 
 footer{
-    position: absolute;
-    width: 100%;
+    position: relative;
     bottom: 0;
+    width: 100%;
 }
 
 #myfooter{

@@ -9,4 +9,3 @@ class Usuario(models.Model):
     contrasenia = models.CharField(max_length=45)
     Countries_idCountries = models.IntegerField()
     PuntuacionMAx_idPuntuacion = models.IntegerField()
-    

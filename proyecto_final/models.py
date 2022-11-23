@@ -1,14 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 import pymysql
+from .cfgDB import password, user
 
 
 class TP():
     def __init__(self):
         self.connection = pymysql.connect(
             host='localhost',
-            user='root',
-            password='1234',
+            user=user,
+            password=password,
             db='tp'
         )
         try:

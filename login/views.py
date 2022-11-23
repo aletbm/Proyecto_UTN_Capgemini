@@ -14,7 +14,7 @@ def index(request):
         if user is not None:
             print("usuario autenticado")
             login(request, user)
-            return redirect('/home')
+            return redirect('/')
         else:
             print("usuario no autenticado")
             return render(request, 'login.html',  {"error":1})

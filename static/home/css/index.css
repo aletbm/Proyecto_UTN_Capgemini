@@ -1,0 +1,52 @@
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: min-content;
+    background-color: var(--color4);
+    width: 100%;
+}
+
+.card{
+    background-color: var(--color2);
+    flex-basis: calc(100%/3 - 40px);
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    height: calc(100% - 40px);
+}
+
+.img-card{
+    flex-basis: 50%;
+}
+
+.img-card > img{
+    height: 100px;
+    object-fit: cover;
+    display: block;
+}
+
+.info-card{
+    padding: 15px;
+    flex-basis: 50%;
+    background-color: var(--color3);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-game{
+    background-color: var(--color1);
+    padding: 15px 30px;
+    border-radius: 10px;
+}
+
+.btn-game > a{
+    color: var(--color2);
+}
