@@ -55,7 +55,7 @@ ROOT_URLCONF = "proyecto_final.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["./home/templates","./login/templates"],
+        "DIRS": ["./home/templates","./login/templates","./register/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -75,9 +75,13 @@ WSGI_APPLICATION = "proyecto_final.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'tp',
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 

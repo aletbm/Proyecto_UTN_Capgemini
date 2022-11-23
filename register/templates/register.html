@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block links %}
-<link rel="stylesheet" href="{% static 'login/css/login.css' %}" />
+<link rel="stylesheet" href="{% static 'register/css/register.css' %}" />
 {% endblock %} 
-{% block title %} Login {% endblock %}
+{% block title %} Register {% endblock %}
 {% block contenido %}
 
 <div class="form-container">
-  <h1>Login</h1>
+  <h1>Register</h1>
   <form class="form" action="" method="post">
     {% csrf_token %}
     <label for="username">Username</label>
@@ -33,7 +33,7 @@
       Ingrese un usuario y una contraseña validas
     </div>
     {% endif %}
-    <input class="button" type="submit" value="Login" />
+    <input class="button" type="submit" value="Register" />
   </form>
 </div>
 
