@@ -1,0 +1,40 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'register/css/register.css' %}" />
+{% endblock %} 
+{% block title %} Register {% endblock %}
+{% block contenido %}
+
+<div class="form-container">
+  <h1>Register</h1>
+  <form class="form" action="" method="post">
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <input
+      class="input"
+      type="text"
+      name="username"
+      id="username"
+      pattern="^[A-Za-z0-9_]{3,29}$"
+      required
+    />
+    <label for="password">Password</label>
+    <input
+      class="input"
+      type="password"
+      name="password"
+      id="password"
+      pattern="^[A-Za-z0-9_]{3,29}$"
+      required
+    />
+    {% if error %}
+    <div class="alert" role="alert">
+      Ingrese un usuario y una contraseña validas
+    </div>
+    {% endif %}
+    <input class="button" type="submit" value="Register" />
+  </form>
+</div>
+
+{% endblock %}

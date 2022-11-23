@@ -1,0 +1,48 @@
+{% extends 'home/base.html' %} 
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'game/css/game.css'%}">
+{% endblock %}
+
+{% block contenido %}
+<div class="game">
+  <div class="webcam">
+    <div class="ring">Loading
+      <span></span>
+    </div>
+    
+    <img src="{% url 'video' %}" alt="Video">
+  </div>
+  <div class="info">
+    <div class="pregunta">
+      <h3 class="contenido-pregunta"></h3>
+    </div>
+    <div class="opciones">
+      <ol class="rounded-list">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ol>
+    </div>
+    <div class="time">
+      La pregunta finalizara en: <span id="seconds"></span> segundos
+    </div>
+    <div class="answer_box">
+      <h3 class="answer_title">Tu respuesta sera:</h3>
+      <form class="respuesta-box" method="post" action="">{% csrf_token %}
+        <input type="text" id="respuesta" name="answer" readonly></input>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'game/js/script.js' %}"></script>
+{% endblock %}
