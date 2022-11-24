@@ -7,35 +7,43 @@
 {% block title %} Inicio {% endblock %}
 
 {% block contenido %}
-<h2>¡Bienvenido!</h2>
-   {% if user.is_authenticated %}
-      <h4>
-         ¡Hola {{ user.username }}!
-      </h4>
-    {% endif %}
+   <section class="welcome">
+      <h2>¡Bienvenido!</h2>
+      {% if user.is_authenticated %}
+         <h4>
+            ¡Hola {{ user.username }}!
+         </h4>
+      {% endif %}
+   </section>
 
+   <section class="games">
+      <div class="title-games">
+         <h3>Nuestros juegos</h3>
+         <div class="title-line"></div>
+      </div>
+      
       <div class="cards">
          {% for i in '0123456'|make_list %}
             <div class="card">
                <div class="img-card">
-                  <img src="{% static 'media/home/logo.png' %}" alt="">
+                  <img src="{% static 'media/game/sport.jpg' %}" alt="">
                </div>
                <div class="info-card">
                   <div class="title-info">
                      Lorem ipsum dolor sit amet.
                   </div>
+                  <div class="line-card"></div>
                   <div class="description-info">
                      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos voluptatem amet incidunt minus deserunt recusandae laboriosam, neque est tempora tempore!</p>
                   </div>
-                  <div class="btn-game">
-                     {% if user.is_authenticated %}
-                        <a href="/game/">Jugar!</a>
-                     {% else %}
-                        <a href="/login/">Jugar!</a>
-                     {% endif %}
-                  </div>
+                  {% if user.is_authenticated %}
+                     <a class="btn btn-game" href="/game/">Jugar!</a>
+                  {% else %}
+                     <a class="btn btn-game" href="/login/">Jugar!</a>
+                  {% endif %}
                </div>
             </div>
          {% endfor %}
       </div>
+   </section>
 {% endblock %}

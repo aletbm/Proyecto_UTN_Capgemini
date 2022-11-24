@@ -21,29 +21,23 @@ class TP():
     def authenticate(self, type, username, password):
         if type == "register":
             query='INSERT INTO usuario(nombre, contrasenia) VALUES ("{}","{}")'.format(username, password)
-            print(query)
             try:
                 self.cursor.execute(query)
                 self.connection.commit()
                 user = User.objects.create_user(username=username, password=password)
-                print(user)
                 
                 return user
             except Exception as e:
                 print("Error al crear el usuario")
         else:
             query='SELECT * FROM usuario WHERE nombre="{}" and contrasenia="{}"'.format(username, password)
-            print(query)
             try:
-                print("antes de buscar")
                 self.cursor.execute(query)
-                print("ejecuto")
                 user = self.cursor.fetchone()
                 user = User.objects.get(username=username)
-                print(user)
-                
                 return user
             except Exception as e:
+                print(e)
                 return None
 
 

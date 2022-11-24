@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="{% static 'media/home/logo.png' %}" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -50,11 +51,11 @@
           <div class="nav-signout-img">
             <img src="{% static 'media/home/log-in.png' %}" alt="" />
           </div>
-          <a href="/signout" class="btn btn-danger">Logout</a>
+          <a href="/signout">Logout</a>
         </div>
         {% else %}
         <div class="nav-register">
-          <a href="/register" class="btn btn-success">Register</a>
+          <a href="/register">Register</a>
         </div>
         <div class="nav-login">
           <a href="/login">Login</a>
