@@ -14,6 +14,8 @@ class VideoCamera(object):
     def get_frame(self):
         #image = cv2.cvtColor(self.frame, cv2.COLOR_RGBA2RGB)
         image = self.CountFingers()
+        if self.finger_count == 0:
+            image = self.superpositionImage(image)
         _, jpeg = cv2.imencode(".jpg", image)
         return jpeg.tobytes()
 
@@ -22,6 +24,7 @@ class VideoCamera(object):
             (self.grabbed, self.frame) = self.video.read()
             
     def writeCountInTxt(self, finger_count):
+        self.finger_count = finger_count
         with open("./static/game/fingerCount.txt", "w") as file:
             file.write(str(finger_count))
             
@@ -72,6 +75,23 @@ class VideoCamera(object):
         finger_count = 0
         return frame
 
+
+    def superpositionImage(self, image):
+        frame = image.copy()
+        s_img = cv2.imread("static/media/game/instruccion.png", -1)
+        s_img = cv2.resize(s_img, (frame.shape[1]//2, frame.shape[0]//2), interpolation = cv2.INTER_AREA)
+        x_offset = frame.shape[1]//4
+        y_offset = frame.shape[0]//4
+        y1, y2 = y_offset, y_offset + s_img.shape[0]
+        x1, x2 = x_offset, x_offset + s_img.shape[1]
+
+        alpha_s = s_img[:, :, 3] / 255.0
+        alpha_l = 1.0 - alpha_s
+
+        for c in range(0, 3):
+            frame[y1:y2, x1:x2, c] = (alpha_s * s_img[:, :, c] + alpha_l * frame[y1:y2, x1:x2, c])
+        
+        return frame
 
 def streamVideo(camera):
     while True:
