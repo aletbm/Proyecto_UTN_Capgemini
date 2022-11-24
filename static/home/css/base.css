@@ -40,7 +40,7 @@ h6{
 }
 
 p{
-    font-weight: 200;
+    font-weight: 300;
 }
 
 a{
@@ -94,6 +94,7 @@ a::before {
     justify-content: center;
     align-items: center;
     flex-basis: 15%;
+    padding: 0 10px;
 }
 
 .nav-logo-img{
@@ -129,7 +130,7 @@ a::before {
 .line-nav{
     width: 0;
     height: 5px;
-    background-color: var(--color1);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(92,173,0,1) 47%, rgba(255,255,255,1) 100%);
     position: absolute;
     bottom: 0;
     opacity: 0;
@@ -284,4 +285,34 @@ footer{
     width: 2px;
     height: 100%;
     background-color: var(--color5);
+}
+
+.btn{
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn:hover{
+    animation: rotateBtn 0.15s forwards;
+}
+
+@keyframes rotateBtn {
+    0%{
+        transform: scale(1) rotate(0deg) e;
+    }
+    25%{
+        transform: rotate(-5deg);
+    }
+    50%{
+        transform: rotate(5deg);
+    }
+    100%{
+        color: var(--color2);
+        background-color: var(--color5);
+        transform: scale(1.1) rotate(0deg);
+    }
 }
