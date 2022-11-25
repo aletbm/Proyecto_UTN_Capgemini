@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     "game",
     "login",
     "register",
-    "signout"
+    "signout",
+    "scoring"
 ]
 
 

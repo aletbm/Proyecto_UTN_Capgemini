@@ -26,6 +26,7 @@ urlpatterns = [
     path("login/", include("login.urls")),
     path("register/", include("register.urls")),
     path("signout/", include("signout.urls")),
+    path("scoring/", include("scoring.urls")),
 ]
 
 
