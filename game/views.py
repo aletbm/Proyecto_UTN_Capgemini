@@ -4,34 +4,40 @@ from django.shortcuts import render
 from django.views import View
 from django.core.serializers.json import DjangoJSONEncoder
 
-from .models import Usuario
+from .models import Pregunta
+
 
 import json
 import time
 from .video import VideoCamera, streamVideo
+from django.db import connection
 
 
 def event_stream(request):
-    quesAndAns = {
-        "2": {
-            "question": "¿Cuantos mundiales ha ganado Argentina?",
-            "options": ["Uno", "Dos", "Tres", "Cuatro", "Ninguna"],
-            "answer": 2,
-        }
-    }
     initial_data = ""
     while True:
-        with open("./static/game/fingerCount.txt", "rb") as file:
-            text = file.read().decode("utf-8")
-        data = json.dumps(
-            list(
-                [
-                    text,
-                    quesAndAns[request.session["id_question"]]["question"],
-                    quesAndAns[request.session["id_question"]]["options"],
-                    quesAndAns[request.session["id_question"]]["answer"],
-                ]
-            ),
+        with open("./static/game/fingerCount.txt", "r") as file:
+            text = list(file.read())
+        submit = 0
+        fingerCount = text[0]
+        manoCerrada = ''.join(text[1:]) == "True"
+        
+        if manoCerrada is False:
+            request.session['nowSubmit'] = True
+        elif manoCerrada is True and request.session['nowSubmit'] is True:
+            submit = True
+        else:
+            request.session['nowSubmit'] = False
+            submit = False
+        
+        data = json.dumps([
+                    fingerCount,
+                    manoCerrada,
+                    request.session["question"],
+                    request.session["options"],
+                    request.session["answer"],
+                    submit,
+                ],
             cls=DjangoJSONEncoder,
         )
 
@@ -44,22 +50,21 @@ def event_stream(request):
 # ==================== VISTAS ====================.
 @gzip.gzip_page
 def game(request):
-    quesAndAns = {
-        "2": {
-            "question": "¿Cuantos mundiales ha ganado Argentina?",
-            "options": ["Uno", "Dos", "Tres", "Cuatro", "Ninguna"],
-            "answer": 2,
-        }
-    }
+    
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM `tp`.`pregunta` JOIN Tema ON Tema.idTema = pregunta.Tema_idTema;")
+    result = cursor.fetchall()
+    
+    request.session["answer"] = result[0][1]
+    request.session["question"] = result[0][2]
+    request.session["options"] = [result[0][3], result[0][4], result[0][5], result[0][6], result[0][7], result[0][8]]
+    
     if request.POST:
-        if (
-            int(request.POST["answer"])
-            == quesAndAns[request.session["id_question"]]["answer"]
-        ):
+        if int(request.POST["answer"]) == request.session["answer"]:
             request.session["points"] += 1
+        print(request.session["points"])
         return render(request, "game/game.html")
     else:
-        request.session["id_question"] = "2"
         request.session["points"] = 0
         return render(request, "game/game.html")
 
@@ -77,9 +82,3 @@ class StreamResult(View):
         response = StreamingHttpResponse(event_stream(request))
         response["Content-Type"] = "text/event-stream"
         return response
-
-
-def test(request):
-    for p in Usuario.objects.raw('SELECT * FROM Usuario'):
-        print(p.nombre)
-    return render(request, "game/i.html")

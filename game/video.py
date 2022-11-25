@@ -4,6 +4,8 @@ import mediapipe as mp
 
 class VideoCamera(object):
     def __init__(self):
+        self.finger_count = 0
+        self.manoCerrada = 0
         self.video = cv2.VideoCapture(0, cv2.CAP_DSHOW)
         (self.grabbed, self.frame) = self.video.read()
         threading.Thread(target=self.update, args=()).start()
@@ -23,10 +25,17 @@ class VideoCamera(object):
         while True:
             (self.grabbed, self.frame) = self.video.read()
             
-    def writeCountInTxt(self, finger_count):
-        self.finger_count = finger_count
+    def writeCountInTxt(self):
         with open("./static/game/fingerCount.txt", "w") as file:
-            file.write(str(finger_count))
+            file.write(str(self.finger_count))
+            file.write(str(self.manoCerrada))
+        return
+            
+    def readCountInTxt(self):
+        with open("./static/game/fingerCount.txt", "r") as file:
+            text = list(file.read())
+        bol = "".join(text[1:]) == "True"
+        return text[0], bol
             
     def CountFingers(self):
         THUMB_IP = 3
@@ -56,25 +65,33 @@ class VideoCamera(object):
                         
                     # Tengamos en cuenta que el origen se encuentra en la esquina superior izquierda    
                     # Identificamos si se levanta el dedo pulgar con respecto al eje X
-                    if handLabel == "Left" and handLandmarks[THUMB_IP][0] < handLandmarks[THUMB_TIP][0]:
-                        finger_count += 1
-                    if handLabel == "Right" and handLandmarks[THUMB_IP][0] > handLandmarks[THUMB_TIP][0]:
-                        finger_count += 1
-                    
-                    # Identificamos dedos levantados con respecto al eje Y
-                    for i in range(4):
-                        if handLandmarks[FINGERS_TIP[i]][1] < handLandmarks[FINGERS_PIP[i]][1]:
+                    if handLabel == "Left":
+                        if handLandmarks[THUMB_IP][0] < handLandmarks[THUMB_TIP][0]:
                             finger_count += 1
-
+                        for i in range(4):
+                            if handLandmarks[FINGERS_TIP[i]][1] < handLandmarks[FINGERS_PIP[i]][1]:
+                                finger_count += 1
+                                
+                    if handLabel == "Right":
+                        manoCerrada_act = True
+                        if handLandmarks[THUMB_IP][0] > handLandmarks[THUMB_TIP][0]:
+                            manoCerrada_act = False
+                        # Identificamos dedos levantados con respecto al eje Y
+                        for i in range(4):
+                            if handLandmarks[FINGERS_TIP[i]][1] < handLandmarks[FINGERS_PIP[i]][1]:
+                                manoCerrada_act = False
+                                        
+                        self.manoCerrada = manoCerrada_act
+                            
                     mp_drawing.draw_landmarks(
                         frame, hand_landmarks, mp_hands.HAND_CONNECTIONS,
                         mp_drawing.DrawingSpec(color=(0,255,255), thickness=3, circle_radius=5),
                         mp_drawing.DrawingSpec(color=(255,0,255), thickness=4, circle_radius=5))
-
-        self.writeCountInTxt(finger_count)
-        finger_count = 0
+                    
+            self.finger_count = finger_count
+            self.writeCountInTxt()        
+                    
         return frame
-
 
     def superpositionImage(self, image):
         frame = image.copy()

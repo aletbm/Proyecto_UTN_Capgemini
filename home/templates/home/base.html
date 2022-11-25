@@ -28,38 +28,34 @@
           </div>
           <h4 class="nav-logo-txt">GetMeFive</h4>
         </div>
-        <ul class="nav-opciones">
-          <li class="nav-opcion">
-            <a href="/">Inicio</a>
-            <div class="line-nav"></div>
-          </li>
-          <li class="nav-opcion">
-            <a href="">Puntuaciones</a>
-            <div class="line-nav"></div>
-          </li>
-          <li class="nav-opcion">
-            <a href="">Sobre el proyecto</a>
-            <div class="line-nav"></div>
-          </li>
-          <li class="nav-opcion">
-            <a href="">Contacto</a>
-            <div class="line-nav"></div>
-          </li>
-        </ul>
+        <div class="nav-opciones">
+            <a class="nav-opcion" href="/">
+              Inicio
+              <div class="line-nav"></div>
+            </a>
+            <a class="nav-opcion" href="/">
+              Puntuaciones
+              <div class="line-nav"></div>
+            </a>
+            <a class="nav-opcion" href="/">
+              Sobre el proyecto
+              <div class="line-nav"></div>
+            </a>
+            <a class="nav-opcion" href="/">
+              Contacto
+              <div class="line-nav"></div>
+            </a>
+        </div>
         {% if user.is_authenticated %}
-        <div class="nav-signout">
-          <div class="nav-signout-img">
-            <img src="{% static 'media/home/log-in.png' %}" alt="" />
-          </div>
-          <a href="/signout">Logout</a>
-        </div>
+        <a class="nav-signout" href="/signout">
+            <div class="nav-signout-img">
+              <img src="{% static 'media/home/log-in.png' %}" alt="" />
+            </div>
+          Logout
+        </a>
         {% else %}
-        <div class="nav-register">
-          <a href="/register">Register</a>
-        </div>
-        <div class="nav-login">
-          <a href="/login">Login</a>
-        </div>
+        <a class="nav-register" href="/register">Register</a>
+          <a class="nav-login" href="/login">Login</a>
         {% endif %}
       </nav>
     </header>

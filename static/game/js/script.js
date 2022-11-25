@@ -6,16 +6,14 @@ eventSource.onopen = function() {
 
 eventSource.onmessage = function(e) {
   let final_data = JSON.parse(e.data)
+  console.log(final_data)
 
-  if(final_data[0].length > 1){
-    myanswer = final_data[0][0] + final_data[0][1]
-  }
-  else{
-    myanswer = final_data[0]
-  }
-  let questions = final_data[1]
-  let options = final_data[2]
-  let answer = final_data[3]
+  let myanswer = final_data[0]
+  let manoCerrada = final_data[1]
+  let questions = final_data[2]
+  let options = final_data[3]
+  let answer = final_data[4]
+  let submit = final_data[5]
 
   document.getElementById('respuesta').value = myanswer
   document.getElementsByClassName('contenido-pregunta')[0].innerHTML = questions
@@ -32,6 +30,10 @@ eventSource.onmessage = function(e) {
   if(myanswer > 0){
     lista[myanswer-1].classList.toggle('selected-option')
   }
+
+  if(submit == true){
+    document.forms[0].submit()
+  }
 }
 
 eventSource.onerror = function(e) {
@@ -46,7 +48,6 @@ function getTime() {
   document.getElementById('seconds').innerHTML = aux
   if(aux <= 0){
     n = 15
-    document.forms[0].submit()
   }
 }
 
