@@ -54,6 +54,7 @@
 
 .img-card{
     height: 50%;
+    width: 100%;
 }
 
 .img-card > img{

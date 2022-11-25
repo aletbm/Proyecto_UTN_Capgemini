@@ -1,6 +1,6 @@
 from django.http import StreamingHttpResponse
 from django.views.decorators import gzip
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.core.serializers.json import DjangoJSONEncoder
 
@@ -44,6 +44,8 @@ def event_stream(request):
 # ==================== VISTAS ====================.
 @gzip.gzip_page
 def game(request):
+    if not request.user.is_authenticated:
+        return redirect("/login")
     quesAndAns = {
         "2": {
             "question": "¿Cuantos mundiales ha ganado Argentina?",
