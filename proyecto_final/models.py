@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 import pymysql
 from .cfgDB import password, user
-from scoring import models
-
 
 class TP():
     def __init__(self):
@@ -45,10 +43,14 @@ class TP():
         query = "SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema FROM usuario JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema"
         try:
             self.cursor.execute(query)
-            fila = self.cursor.fetchall()
-            print(fila)
+            tabla = self.cursor.fetchall()
+            for fila in tabla:
+                print("Usuario: ", fila[0])
+                print("Puntuacion: ", fila[1])
+                print("Fecha: ",fila[2])
+                print("Tema: ", fila[3])
         except Exception as e:
-                print(e)
-                return None
+                print("Error en tabla puntuación")
+                raise
 
 db = TP()
