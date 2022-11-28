@@ -12,6 +12,6 @@ def index(request):
         )
 
     temas = []
-    for p in Tema.objects.raw("SELECT * FROM tp.tema"):
-        temas.append(p.Tema)
+    for p in Tema.objects.raw("SELECT * FROM tema"):
+        temas.append(p.tema)
     return render(request, "home/index.html", {"temas": temas})
