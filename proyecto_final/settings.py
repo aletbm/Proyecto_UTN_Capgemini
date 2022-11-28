@@ -8,6 +8,16 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
+
+pip install mysqlclient
+pip install mediapipe
+pip install django
+pip install opencv-python
+
+python manage.py inspectdb > models.py
+pip manage.py makemigrations
+pip manage.py migrate
+
 """
 
 from pathlib import Path
@@ -80,7 +90,7 @@ WSGI_APPLICATION = "proyecto_final.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-# pip install mysqlclient 
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",

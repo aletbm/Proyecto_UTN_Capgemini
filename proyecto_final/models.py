@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 import pymysql
 from .cfgDB import password, user
 
-
 class TP():
     def __init__(self):
         self.connection = pymysql.connect(

@@ -3,14 +3,11 @@ from django.views.decorators import gzip
 from django.shortcuts import render
 from django.views import View
 from django.core.serializers.json import DjangoJSONEncoder
-
-from .models import Pregunta
-
+from home.models import Pregunta
 
 import json
 import time
 from .video import VideoCamera, streamVideo
-from django.db import connection
 
 
 def event_stream(request):
@@ -20,24 +17,25 @@ def event_stream(request):
             text = list(file.read())
         submit = 0
         fingerCount = text[0]
-        manoCerrada = ''.join(text[1:]) == "True"
-        
+        manoCerrada = "".join(text[1:]) == "True"
+
         if manoCerrada is False:
-            request.session['nowSubmit'] = True
-        elif manoCerrada is True and request.session['nowSubmit'] is True:
+            request.session["nowSubmit"] = True
+        elif manoCerrada is True and request.session["nowSubmit"] is True:
             submit = True
         else:
-            request.session['nowSubmit'] = False
+            request.session["nowSubmit"] = False
             submit = False
-        
-        data = json.dumps([
-                    fingerCount,
-                    manoCerrada,
-                    request.session["question"],
-                    request.session["options"],
-                    request.session["answer"],
-                    submit,
-                ],
+
+        data = json.dumps(
+            [
+                fingerCount,
+                manoCerrada,
+                request.session["question"],
+                request.session["options"],
+                request.session["answer"],
+                submit,
+            ],
             cls=DjangoJSONEncoder,
         )
 
@@ -50,15 +48,19 @@ def event_stream(request):
 # ==================== VISTAS ====================.
 @gzip.gzip_page
 def game(request):
-    
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM `tp`.`pregunta` JOIN Tema ON Tema.idTema = pregunta.Tema_idTema;")
-    result = cursor.fetchall()
-    
-    request.session["answer"] = result[0][1]
-    request.session["question"] = result[0][2]
-    request.session["options"] = [result[0][3], result[0][4], result[0][5], result[0][6], result[0][7], result[0][8]]
-    
+    preguntas = []
+    for p in Pregunta.objects.raw("SELECT * FROM `Pregunta`"):
+        preguntas.append(p)
+    request.session["answer"] = preguntas[0].respuesta
+    request.session["question"] = preguntas[0].pregunta
+    request.session["options"] = [
+        preguntas[0].opcion1,
+        preguntas[0].opcion2,
+        preguntas[0].opcion3,
+        preguntas[0].opcion4,
+        preguntas[0].opcion5,
+    ]
+
     if request.POST:
         if int(request.POST["answer"]) == request.session["answer"]:
             request.session["points"] += 1
