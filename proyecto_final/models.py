@@ -44,13 +44,39 @@ class TP():
         try:
             self.cursor.execute(query)
             tabla = self.cursor.fetchall()
-            for fila in tabla:
-                print("Usuario: ", fila[0])
-                print("Puntuacion: ", fila[1])
-                print("Fecha: ",fila[2])
-                print("Tema: ", fila[3])
+            return tabla
         except Exception as e:
                 print("Error en tabla puntuación")
                 raise
-
+    
+    def filterByTema(self,text):
+        query = f""" 
+                    SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema FROM usuario
+                    JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario
+                    JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema
+                    where tema.Tema = "{ text }"
+                    """
+        try:
+            self.cursor.execute(query)
+            tabla = self.cursor.fetchall()
+            return tabla
+        except Exception as e:
+                print("Error al filtrar")
+                raise
+    
+    def filterByUser(self,text):
+        query  = f"""
+                    SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema FROM usuario
+                    JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario
+                    JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema
+                    where usuario.nombre = "{ text }" 
+                    """
+        try:
+            self.cursor.execute(query)
+            tabla = self.cursor.fetchall()
+            return tabla
+        except Exception as e:
+                print("Error al filtrar")
+                raise
+            
 db = TP()

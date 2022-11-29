@@ -13,8 +13,37 @@
          <div class="title-line"></div>
       </div>
       
-      <div class="table">
-         
+      <div>
+         <table class="table">
+            <tr>
+               <th class="fila-titulo">Usuario</th>
+               <th class="fila-titulo">Puntuación</th>
+               <th class="fila-titulo">Fecha</th>
+               <th class="fila-titulo">Tema</th>
+            </tr>
+            {% for fila in tabla %}
+            <tr>
+               <td class="fila-puntuacion">{{ fila.0 }}</td>
+               <td class="fila-puntuacion">{{ fila.1 }}</td>
+               <td class="fila-puntuacion">{{ fila.2 }}</td>
+               <td class="fila-puntuacion">{{ fila.3 }}</td>
+            </tr>
+            {% endfor %}
+         </table>
+      </div>
+
+      <div>
+         <form action="filter" method="get">
+            <fieldset>
+               <label>Filtrar por:</label>
+               <select name="filter">
+                  <option value="user">Usuario</option>
+                  <option value="tema">Tema</option>
+              </select>
+              <input type="text" name="text">
+              <input type="submit" value="Filtrar">
+            </fieldset>
+         </form>
       </div>
    </section>
 {% endblock %}
