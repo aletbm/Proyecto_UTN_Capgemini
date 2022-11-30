@@ -1,10 +1,6 @@
-{% extends 'home/base.html' %}
-{% load static %}
-{% block links %}
+{% extends 'home/base.html' %} {% load static %} {% block links %}
 <link rel="stylesheet" href="{% static 'register/css/register.css' %}" />
-{% endblock %} 
-{% block title %} Register {% endblock %}
-{% block contenido %}
+{% endblock %} {% block title %} Register {% endblock %} {% block contenido %}
 
 <div class="form-container">
   <h1>Register</h1>
@@ -28,6 +24,12 @@
       pattern="^[A-Za-z0-9_]{3,29}$"
       required
     />
+    <label for="country">Country</label>
+    <select name="country" id="country">
+      {% for country in countries %}
+      <option value="{{ country.idcountries }}">{{ country.name }}</option>
+      {% endfor %}
+    </select>
     {% if error %}
     <div class="alert" role="alert">
       Ingrese un usuario y una contraseña validas

@@ -10,7 +10,7 @@ def index(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = db.authenticate(type="login",username=username, password=password)
+        user = db.login(username=username, password=password)
         if user is not None:
             print("usuario autenticado")
             login(request, user)
