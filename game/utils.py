@@ -3,8 +3,15 @@ import datetime as dt
 def readCountInTxt(path):
     with open(path, "r") as file:
         text = list(file.read())
-    bol = "".join(text[1:]) == "True"
-    return text[0], bol
+        
+    if len(text) > 0:
+        bol = "".join(text[1:]) == "True"
+        finger = text[0]
+    else:
+        bol = False
+        finger = 0
+        
+    return finger, bol
 
 
 def timer(start, m, s):

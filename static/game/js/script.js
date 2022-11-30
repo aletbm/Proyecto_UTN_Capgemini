@@ -14,25 +14,10 @@ eventSource.onmessage = function(e) {
   let timer = final_data[4].substring(3, 7)
 
   document.getElementById('seconds').innerHTML = timer
-
   document.getElementById('respuesta').value = myanswer
   document.getElementsByClassName('contenido-pregunta')[0].innerHTML = questions
-  lista = document.getElementsByClassName('rounded-list')[0]
-  lista.innerHTML = ''
 
-  for(let i=0; i<options.length; i++){
-    let option = document.createElement('li')
-    option.innerHTML = options[i]
-    lista.appendChild(option)
-  }
-
-  if(document.getElementsByClassName('selected-option').length > 0){
-    document.getElementsByClassName('selected-option')[0].classList.toggle('selected-option')
-  }
-
-  if(myanswer > 0 && myanswer <= options.length){
-    lista.children[myanswer-1].classList.toggle('selected-option')
-  }
+  createOptions(options)
 
   if(submit == true && myanswer > 0 && myanswer <= options.length){
     document.forms[0].submit()
@@ -50,4 +35,23 @@ eventSource.onmessage = function(e) {
 
 eventSource.onerror = function(e) {
   console.log(`error ${e}`);
+}
+
+function createOptions(options) {
+  lista = document.getElementsByClassName('rounded-list')[0]
+  lista.innerHTML = ''
+
+  for(let i=0; i<options.length; i++){
+    let option = document.createElement('li')
+    option.innerHTML = options[i]
+    lista.appendChild(option)
+  }
+
+  if(document.getElementsByClassName('selected-option').length > 0){
+    document.getElementsByClassName('selected-option')[0].classList.toggle('selected-option')
+  }
+
+  if(myanswer > 0 && myanswer <= options.length){
+    lista.children[myanswer-1].classList.toggle('selected-option')
+  }
 }

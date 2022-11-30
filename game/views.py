@@ -13,10 +13,11 @@ from .utils import readCountInTxt, timer
 
 seed(42)
 
+
 def event_stream(request):
     while True:
         submit = False
-        
+
         fingerCount, manoCerrada = readCountInTxt("./static/game/fingerCount.txt")
 
         if manoCerrada is False:
@@ -26,18 +27,17 @@ def event_stream(request):
         else:
             request.session["nowSubmit"] = False
             submit = False
-        
+
         data = json.dumps(
             [
                 fingerCount,
                 request.session["question"],
                 request.session["options"],
                 submit,
-                str(timer(request.session["timeStart"], 3, 1))
+                str(timer(request.session["timeStart"], 3, 1)),
             ],
             cls=DjangoJSONEncoder,
         )
-        print(str(timer(request.session["timeStart"], 3, 1)))
         yield "\ndata: {}\n\n".format(data)
         time.sleep(0.5)
 
@@ -45,23 +45,29 @@ def event_stream(request):
 # ==================== VISTAS ====================
 def getPreguntas(request):
     preguntas = []
-    for p in Pregunta.objects.raw(f"SELECT * FROM pregunta JOIN tema ON tema.idTema = pregunta.Tema_idTema WHERE Tema='{request.session['tema']}';"):
-        preguntas.append({"pregunta":p.pregunta,
-                          "respuesta":p.respuesta,
-                          "opcion1":p.opcion1,
-                          "opcion2":p.opcion2,
-                          "opcion3":p.opcion3,
-                          "opcion4":p.opcion4,
-                          "opcion5":p.opcion5,
-                          })
+    for p in Pregunta.objects.raw(
+        f"SELECT * FROM pregunta JOIN tema ON tema.idTema = pregunta.Tema_idTema WHERE Tema='{request.session['tema']}';"
+    ):
+        preguntas.append(
+            {
+                "pregunta": p.pregunta,
+                "respuesta": p.respuesta,
+                "opcion1": p.opcion1,
+                "opcion2": p.opcion2,
+                "opcion3": p.opcion3,
+                "opcion4": p.opcion4,
+                "opcion5": p.opcion5,
+            }
+        )
     request.session["preguntas"] = preguntas.copy()
     return
 
+
 def loadPregunta(request):
     preguntas = request.session["preguntas"]
-    
-    i = randint(0, len(preguntas)-1)
-    
+
+    i = randint(0, len(preguntas) - 1)
+
     listaOpciones = [
         preguntas[i]["opcion1"],
         preguntas[i]["opcion2"],
@@ -71,9 +77,9 @@ def loadPregunta(request):
     ]
     request.session["options"] = []
     for x in listaOpciones:
-        if x != 'nan':
+        if x != "nan":
             request.session["options"].append(x)
-    
+
     request.session["answer"] = preguntas[i]["respuesta"]
     request.session["question"] = preguntas[i]["pregunta"]
     preguntas.pop(i)
@@ -83,13 +89,17 @@ def loadPregunta(request):
 @gzip.gzip_page
 def game(request):
     if request.POST:
-        
-        request.session["contestadas"].append({ 
-                                               "pregunta": request.session["question"],
-                                               "respuesta": request.session["options"][request.session["answer"]-1],
-                                               "mirespuesta":request.session["options"][int(request.POST["answer"])-1],
-                                               })
-        
+
+        request.session["contestadas"].append(
+            {
+                "pregunta": request.session["question"],
+                "respuesta": request.session["options"][request.session["answer"] - 1],
+                "mirespuesta": request.session["options"][
+                    int(request.POST["answer"]) - 1
+                ],
+            }
+        )
+
         if int(request.POST["answer"]) == request.session["answer"]:
             request.session["points"] += 1
 
@@ -114,8 +124,16 @@ def loadQuestions(request, tema):
     loadPregunta(request)
     return redirect("/game/")
 
+
 def resultado(request):
-    return render(request, 'game/resultado.html', {"resultados":request.session["contestadas"], "puntuacion":request.session["points"]})
+    return render(
+        request,
+        "game/resultado.html",
+        {
+            "resultados": request.session["contestadas"],
+            "puntuacion": request.session["points"],
+        },
+    )
 
 
 def video(request):
