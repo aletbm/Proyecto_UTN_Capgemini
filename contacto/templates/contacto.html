@@ -1,43 +1,50 @@
 {% extends 'home/base.html' %} {% load static %} {% block links %}
 <link rel="stylesheet" href="{% static 'contacto/css/contacto.css' %}" />
-{% endblock %} {% block title %} Sobre el proyecto {% endblock %} {% block contenido %}
+{% endblock %} {% block title %} Contacto {% endblock %} 
+{% block contenido %}
 
 <section class="container">
-    <div class="title">
-       <h3>Contacto</h3>
-       <div class="title-line"></div>
-    </div>
-    
-    <div class="content">
-        <h4>Alexander Rios</h4>
-        <ul>
-            <li>
-                <a href="https://github.com/aletbm">GitHub</a>
-            </li>
-            <li>
-                <a href="">LinkedIn</a>
-            </li>
-        </ul>
-        <h4>Gustavo Haite Gulotta</h4>
-        <ul>
-            <li>
-                <a href="https://github.com/Gustavo-Haite">GitHub</a>
-            </li>
-            <li>
-                <a href="">LinkedIn</a>
-            </li>
-        </ul>
-        <h4>Martin Lingeri</h4>
-        <ul>
+  <div class="title">
+    <h3>Contacto</h3>
+    <div class="title-line"></div>
+  </div>
+
+  <div class="content">
+    <h4>Alexander Rios</h4>
+    <div class="contact-links">
+      <ul>
+        <li>
+          <a class="contact-a" href="https://github.com/aletbm">GitHub</a>
+        </li>
+        <li>
+          <a class="contact-a" href="">LinkedIn</a>
+        </li>
+      </ul>
 
 
-            <li>
-                <a href="https://github.com/MartinLingeri">GitHub</a>
-            </li>
-            <li>
-                <a href="https://linkedin.com/in/martin-lingeri">LinkedIn</a>
-            </li>
-        </ul>
     </div>
+    <h4>Gustavo Haite Gulotta</h4>
+    <div class="contact-links">
+      <ul>
+        <li>
+          <a class="contact-a" href="https://github.com/Gustavo-Haite">GitHub</a>
+        </li>
+        <li>
+          <a class="contact-a" href="">LinkedIn</a>
+        </li>
+      </ul>
+    </div>
+    <h4>Martin Lingeri</h4>
+    <div class="contact-links">
+      <ul>
+        <li>
+          <a class="contact-a" href="https://github.com/MartinLingeri">GitHub</a>
+        </li>
+        <li>
+          <a class="contact-a" href="https://linkedin.com/in/martin-lingeri">LinkedIn</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </section>
 {% endblock %}
