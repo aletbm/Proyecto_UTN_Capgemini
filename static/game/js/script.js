@@ -1,37 +1,49 @@
 var eventSource  = new EventSource("/game/streamResult");
 
 eventSource.onopen = function() {
-  console.log('Yay! its open?');
+  console.log('Comunicacion establecida con exito');
 }
 
 eventSource.onmessage = function(e) {
   let final_data = JSON.parse(e.data)
-  console.log(final_data)
 
   let myanswer = final_data[0]
-  let manoCerrada = final_data[1]
-  let questions = final_data[2]
-  let options = final_data[3]
-  let answer = final_data[4]
-  let submit = final_data[5]
+  let questions = final_data[1]
+  let options = final_data[2]
+  let submit = final_data[3]
+  let timer = final_data[4].substring(3, 7)
+
+  document.getElementById('seconds').innerHTML = timer
 
   document.getElementById('respuesta').value = myanswer
   document.getElementsByClassName('contenido-pregunta')[0].innerHTML = questions
-  lista = document.getElementsByClassName('rounded-list')[0].children
+  lista = document.getElementsByClassName('rounded-list')[0]
+  lista.innerHTML = ''
 
-  for(let i=0; i<lista.length; i++){
-    lista[i].innerHTML = options[i]
+  for(let i=0; i<options.length; i++){
+    let option = document.createElement('li')
+    option.innerHTML = options[i]
+    lista.appendChild(option)
   }
 
   if(document.getElementsByClassName('selected-option').length > 0){
     document.getElementsByClassName('selected-option')[0].classList.toggle('selected-option')
   }
 
-  if(myanswer > 0){
-    lista[myanswer-1].classList.toggle('selected-option')
+  if(myanswer > 0 && myanswer <= options.length){
+    lista.children[myanswer-1].classList.toggle('selected-option')
   }
 
-  if(submit == true){
+  if(submit == true && myanswer > 0 && myanswer <= options.length){
+    document.forms[0].submit()
+  }
+
+  if(timer == "0:00"){
+    endGame = document.createElement('input')
+    endGame.value = true
+    endGame.name = "endGame"
+    endGame.classList.add("noVisible")
+    document.forms[0].appendChild(endGame)
     document.forms[0].submit()
   }
 }
@@ -39,16 +51,3 @@ eventSource.onmessage = function(e) {
 eventSource.onerror = function(e) {
   console.log(`error ${e}`);
 }
-
-var n = 15
-document.getElementById('seconds').innerHTML = n
-
-function getTime() {
-  let aux = n--
-  document.getElementById('seconds').innerHTML = aux
-  if(aux <= 0){
-    n = 15
-  }
-}
-
-setInterval(getTime, 1000)

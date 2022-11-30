@@ -40,7 +40,7 @@
                      <p>Juego de preguntas y respuestas con tematica orientada en {{tema|lower}}, <br>¡Consigue responder la mayor cantidad de preguntas posibles y conviertete en el mejor jugador del mundo!</p>
                   </div>
                   {% if user.is_authenticated %}
-                     <a class="btn btn-game" href="/game/">Jugar!</a>
+                     <a class="btn btn-game" href="game/loadGame/{{tema}}/">Jugar!</a>
                   {% else %}
                      <a class="btn btn-game" href="/login/">Jugar!</a>
                   {% endif %}

@@ -8,7 +8,8 @@ class VideoCamera(object):
         self.manoCerrada = 0
         self.video = cv2.VideoCapture(0, cv2.CAP_DSHOW)
         (self.grabbed, self.frame) = self.video.read()
-        threading.Thread(target=self.update, args=()).start()
+        self.thread = threading.Thread(target=self.update, args=())
+        self.thread.start()
 
     def __del__(self):
         self.video.release()
@@ -30,12 +31,6 @@ class VideoCamera(object):
             file.write(str(self.finger_count))
             file.write(str(self.manoCerrada))
         return
-            
-    def readCountInTxt(self):
-        with open("./static/game/fingerCount.txt", "r") as file:
-            text = list(file.read())
-        bol = "".join(text[1:]) == "True"
-        return text[0], bol
             
     def CountFingers(self):
         THUMB_IP = 3

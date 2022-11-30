@@ -229,3 +229,7 @@ ol{
     transform:rotate(405deg);
     }
 }
+
+.noVisible{
+    display: none;
+}

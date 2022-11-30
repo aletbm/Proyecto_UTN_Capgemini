@@ -299,8 +299,6 @@ footer{
 }
 
 .btn{
-    width: 80px;
-    height: 40px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
