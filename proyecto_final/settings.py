@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     "register",
     "signout",
     "proyecto_final",
+    "sobre_el_proyecto",
+    "contacto",
 ]
 
 
