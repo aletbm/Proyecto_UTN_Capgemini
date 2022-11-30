@@ -81,7 +81,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "proyecto_final.wsgi.application"
 
 
-AUTH_USER_MODELS = "proyecto_final.CustomUser"
+AUTH_USER_MODEL = "proyecto_final.CustomUser"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

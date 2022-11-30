@@ -190,3 +190,6 @@ class Usuario(models.Model):
     class Meta:
         managed = False
         db_table = 'usuario'
+
+    def is_authenticated(self):
+        pass

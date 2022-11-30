@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager, PermissionsMixin
 import pymysql
 from .cfgDB import password, user
 
@@ -23,7 +23,7 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-class CustomuUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     idUsuario = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=45, unique=True)
     contrasenia = models.CharField(max_length=45)
@@ -59,7 +59,7 @@ class TP():
         try:
             self.cursor.execute(query)
             self.connection.commit()
-            user = CustomuUser.objects.create_user(username=username, password=password, country=country)
+            user = CustomUser.objects.create_user(username=username, password=password, country=country)
             
             return user
         except Exception as e:
@@ -70,7 +70,7 @@ class TP():
         try:
             self.cursor.execute(query)
             user = self.cursor.fetchone()
-            user = User.objects.get(username=username)
+            user = CustomUser.objects.get(username=username)
             return user
         except Exception as e:
             print(e)
