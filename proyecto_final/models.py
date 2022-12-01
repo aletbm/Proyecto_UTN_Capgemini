@@ -40,7 +40,12 @@ class TP():
                 return None
 
     def obtenerTabla(self):
-        query = "SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema FROM usuario JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema order by  puntuacionmax.puntuacion desc"
+        query = """
+                SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema FROM usuario 
+                JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario 
+                JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema 
+                order by  puntuacionmax.puntuacion desc
+                """
         try:
             self.cursor.execute(query)
             tabla = self.cursor.fetchall()
