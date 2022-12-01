@@ -1,10 +1,12 @@
 {% extends 'home/base.html' %}
+
 {% load static %}
+
+{% block title %} Scoring {% endblock %}
+
 {% block links %}
 <link rel="stylesheet" href="{% static 'scoring/css/scoring.css'%}">
 {% endblock %}
-
-{% block title %} Scoring {% endblock %}
 
 {% block contenido %}
    <section class="scoring">
@@ -13,20 +15,20 @@
          <div class="title-line"></div>
       </div>
       
-      <div>
-         <table class="table">
-            <tr>
-               <th class="fila-titulo">Usuario</th>
-               <th class="fila-titulo">Puntuación</th>
-               <th class="fila-titulo">Fecha</th>
-               <th class="fila-titulo">Tema</th>
+      <div class="table">
+         <table>
+            <tr class="fila-titulo">
+               <th class="celda-titulo">Usuario</th>
+               <th class="celda-titulo">Puntuación</th>
+               <th class="celda-titulo">Fecha</th>
+               <th class="celda-titulo">Tema</th>
             </tr>
             {% for fila in tabla %}
-            <tr>
-               <td class="fila-puntuacion">{{ fila.0 }}</td>
-               <td class="fila-puntuacion">{{ fila.1 }}</td>
-               <td class="fila-puntuacion">{{ fila.2 }}</td>
-               <td class="fila-puntuacion">{{ fila.3 }}</td>
+            <tr class="fila-puntuacion">
+               <td class="celda-puntuacion">{{ fila.0 }}</td>
+               <td class="celda-puntuacion">{{ fila.1 }}</td>
+               <td class="celda-puntuacion">{{ fila.2 }}</td>
+               <td class="celda-puntuacion">{{ fila.3 }}</td>
             </tr>
             {% endfor %}
          </table>
@@ -34,14 +36,14 @@
 
       <div>
          <form action="filter" method="get">
-            <fieldset>
+            <fieldset class="filter">
                <label>Filtrar por:</label>
-               <select name="filter">
+               <select name="filter" class="filter-by">
                   <option value="user">Usuario</option>
                   <option value="tema">Tema</option>
               </select>
               <input type="text" name="text">
-              <input type="submit" value="Filtrar">
+              <input type="submit" value="Filtrar" class="button">
             </fieldset>
          </form>
       </div>

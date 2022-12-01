@@ -1,14 +1,41 @@
-.fila-titulo{
+.celda-titulo{
     border: 1px solid black;
     text-align: center;
+    padding: 15px;
+    background-color: var(--color1);
+    font-weight: bold;
 }
 
-.fila-puntuacion{
+.celda-puntuacion{
     border: 1px solid black;
     text-align: center;
+    padding: 15px;
+    background-color: var(--color2);
 }
 
 .table{
-    border: 1px solid black;
+    display: flex;
+    justify-content: center;
     border-collapse: collapse;
+    margin: 15px 0px;
+    /* margin: 10 px; */
+}
+
+.filter{
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+.title-scoring{
+    display: flex;
+    justify-content: center;
+}
+
+.filter-by{
+    margin: 0px 5px
+}
+
+.button{
+    margin-left: 5px;
 }
