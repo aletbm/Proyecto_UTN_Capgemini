@@ -28,6 +28,7 @@ urlpatterns = [
     path("signout/", include("signout.urls")),
     path("sobre_el_proyecto/", include("sobre_el_proyecto.urls")),
     path("contacto/", include("contacto.urls")),
+    path("scoring/", include("scoring.urls")),
 ]
 
 

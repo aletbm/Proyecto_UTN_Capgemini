@@ -24,5 +24,51 @@ class TP():
         except Exception as e:
             print("Error al crear el usuario")
 
-
+    def obtenerTabla(self):
+        query = """
+                SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema FROM usuario 
+                JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario 
+                JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema 
+                order by  puntuacionmax.puntuacion desc
+                """
+        try:
+            self.cursor.execute(query)
+            tabla = self.cursor.fetchall()
+            return tabla
+        except Exception as e:
+                print("Error en tabla puntuación")
+                raise
+    
+    def filterByTema(self,text):
+        query = f""" 
+                    SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema FROM usuario
+                    JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario
+                    JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema
+                    where tema.Tema = "{ text }"
+                    order by  puntuacionmax.puntuacion desc
+                    """
+        try:
+            self.cursor.execute(query)
+            tabla = self.cursor.fetchall()
+            return tabla
+        except Exception as e:
+                print("Error al filtrar")
+                raise
+    
+    def filterByUser(self,text):
+        query  = f"""
+                    SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema FROM usuario
+                    JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario
+                    JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema
+                    where usuario.nombre = "{ text }" 
+                    order by  puntuacionmax.puntuacion desc
+                    """
+        try:
+            self.cursor.execute(query)
+            tabla = self.cursor.fetchall()
+            return tabla
+        except Exception as e:
+                print("Error al filtrar")
+                raise
+            
 db = TP()
