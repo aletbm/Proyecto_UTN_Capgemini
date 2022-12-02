@@ -1,20 +1,26 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 
-from proyecto_final.models import db, Countries
+from proyecto_final.models import db
+from register.forms import RegisterForm
 
 def index(request):
+    context = {}
     if request.user.is_authenticated:
         return redirect('/')
     if request.method == 'POST':
-            username = request.POST['username']
-            password = request.POST['password']
-            country = request.POST['country']
-            user = db.register(username=username, password=password, country=country)
-            login(request, user,  backend='django.contrib.auth.backends.AllowAllUsersModelBackend')
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            contrasenia = form.cleaned_data['password1']
+            country = form.cleaned_data['country']
+            db.register(nombre, contrasenia, country)
+            user = form.save()
+            login(request, user)
             return redirect('/')
+        else:
+            context['form'] = form
     else:
-        countries = []
-        for p in Countries.objects.raw("SELECT * FROM countries"):
-            countries.append(p)
-        return render(request, 'register.html', {"countries": countries})
+        form = RegisterForm()
+        context['form'] = form
+    return render(request, 'register.html', context)
