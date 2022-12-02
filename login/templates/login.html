@@ -16,13 +16,13 @@
       {% for error in field.errors %}
         <p style="color:red">{{error}}</p>
       {% endfor %}
-      {% if form.non_field_errors %}
-        <div style="color:red">
-          <p>{{form.non_field_errors}}</p>
-        </div>
-      {% endif %}
       </p>
     {% endfor %}
+    {% if form.non_field_errors %}
+      <div style="color:red">
+        <p>{{form.non_field_errors}}</p>
+      </div>
+    {% endif %}
     <input class="button" type="submit" value="Login" />
   </form>
 </div>

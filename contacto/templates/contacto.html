@@ -1,7 +1,6 @@
 {% extends 'home/base.html' %} {% load static %} {% block links %}
 <link rel="stylesheet" href="{% static 'contacto/css/contacto.css' %}" />
-{% endblock %} {% block title %} Contacto {% endblock %} 
-{% block contenido %}
+{% endblock %} {% block title %} Contacto {% endblock %} {% block contenido %}
 
 <section class="contenedor">
   <div class="title">
@@ -10,38 +9,94 @@
   </div>
 
   <div class="content">
-    <h4>Alexander Rios</h4>
-    <div class="contact-links">
-      <ul>
-        <li>
-          <a class="contact-a" href="https://github.com/aletbm">GitHub</a>
-        </li>
-        <li>
-          <a class="contact-a" href="">LinkedIn</a>
-        </li>
-      </ul>
+    <div class="card">
+      <div class="img-card">
+        <img src="{% static 'media/home/logo.png' %}" alt="Imagen alumno">
+      </div>
+      <div class="info-card">
+        <div class="text-info">
+          <h4 class="title-card">Alexander Rios</h4>
+          <p>Estudiante de xxxxxx</p>
+        </div>
+        <div class="card-line"></div>
+        <div class="contact-links">
+          <ul>
+            <li>
+              <a class="contact-a" href="https://github.com/aletbm"><img src="{% static 'media/contacto/github.png' %}" alt="Logo de github"></a>
+            </li>
+            <li>
+              <a class="contact-a" href=""><img src="{% static 'media/contacto/linkedin.png' %}" alt="Logo de Linkedin"></a>
+            </li>
+            <li>
+              <a class="contact-a" href=""
+                ><img src="{% static 'media/contacto/instagram.png' %}" alt="Logo de Instagram"></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <h4>Gustavo Haite Gulotta</h4>
-    <div class="contact-links">
-      <ul>
-        <li>
-          <a class="contact-a" href="https://github.com/Gustavo-Haite">GitHub</a>
-        </li>
-        <li>
-          <a class="contact-a" href="">LinkedIn</a>
-        </li>
-      </ul>
+
+    <div class="card">
+      <div class="img-card">
+        <img src="{% static 'media/home/logo.png' %}" alt="Imagen alumno">
+      </div>
+      <div class="info-card">
+        <div class="text-info">
+          <h4 class="title-card">Gustavo Haite Gulotta</h4>
+          <p>Estudiante de xxxxxx</p>
+        </div>
+        <div class="card-line"></div>
+        <div class="contact-links">
+          <ul>
+            <li>
+              <a class="contact-a" href="https://github.com/Gustavo-Haite"
+                ><img src="{% static 'media/contacto/github.png' %}" alt="Logo de github"></a
+              >
+            </li>
+            <li>
+              <a class="contact-a" href=""><img src="{% static 'media/contacto/linkedin.png' %}" alt="Logo de Linkedin"></a>
+            </li>
+            <li>
+              <a class="contact-a" href=""
+                ><img src="{% static 'media/contacto/instagram.png' %}" alt="Logo de Instagram"></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <h4>Martin Lingeri</h4>
-    <div class="contact-links">
-      <ul>
-        <li>
-          <a class="contact-a" href="https://github.com/MartinLingeri">GitHub</a>
-        </li>
-        <li>
-          <a class="contact-a" href="https://linkedin.com/in/martin-lingeri">LinkedIn</a>
-        </li>
-      </ul>
+
+    <div class="card">
+      <div class="img-card">
+        <img src="{% static 'media/home/logo.png' %}" alt="Imagen alumno">
+      </div>
+      <div class="info-card">
+        <div class="text-info">
+          <h4 class="title-card">Martin Lingeri</h4>
+          <p>Estudiante de xxxxxx</p>
+        </div>
+        <div class="card-line"></div>
+        <div class="contact-links">
+          <ul>
+            <li>
+              <a class="contact-a" href="https://github.com/MartinLingeri"
+                ><img src="{% static 'media/contacto/github.png' %}" alt="Logo de github"></a
+              >
+            </li>
+            <li>
+              <a class="contact-a" href="https://linkedin.com/in/martin-lingeri"
+                ><img src="{% static 'media/contacto/linkedin.png' %}" alt="Logo de Linkedin"></a
+              >
+            </li>
+            <li>
+              <a class="contact-a" href=""
+                ><img src="{% static 'media/contacto/instagram.png' %}" alt="Logo de Instagram"></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>

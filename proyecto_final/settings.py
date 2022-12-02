@@ -14,7 +14,6 @@ pip install mediapipe
 pip install django
 pip install opencv-python
 
-python manage.py inspectdb > models.py
 pip manage.py makemigrations
 pip manage.py migrate
 
