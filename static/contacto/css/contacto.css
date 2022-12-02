@@ -1,5 +1,4 @@
-.container{
-    margin-top: 30px;
+.contenedor{
     height: min-content;
     background-color: var(--color4);
     padding: 30px;

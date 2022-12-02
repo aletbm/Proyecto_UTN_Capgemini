@@ -17,19 +17,14 @@ eventSource.onmessage = function(e) {
   document.getElementById('respuesta').value = myanswer
   document.getElementsByClassName('contenido-pregunta')[0].innerHTML = questions
 
-  createOptions(options)
+  createOptions(options, myanswer)
 
   if(submit == true && myanswer > 0 && myanswer <= options.length){
     document.forms[0].submit()
   }
 
   if(timer == "0:00"){
-    endGame = document.createElement('input')
-    endGame.value = true
-    endGame.name = "endGame"
-    endGame.classList.add("noVisible")
-    document.forms[0].appendChild(endGame)
-    document.forms[0].submit()
+    endGameSubmit()
   }
 }
 
@@ -37,7 +32,7 @@ eventSource.onerror = function(e) {
   console.log(`error ${e}`);
 }
 
-function createOptions(options) {
+function createOptions(options, myanswer) {
   lista = document.getElementsByClassName('rounded-list')[0]
   lista.innerHTML = ''
 
@@ -55,3 +50,14 @@ function createOptions(options) {
     lista.children[myanswer-1].classList.toggle('selected-option')
   }
 }
+
+function endGameSubmit() {
+    endGame = document.createElement('input')
+    endGame.value = true
+    endGame.name = "endGame"
+    endGame.classList.add("noVisible")
+    document.forms[0].appendChild(endGame)
+    document.forms[0].submit()
+}
+
+document.getElementById("endGame").addEventListener("click", endGameSubmit)
