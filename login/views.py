@@ -1,22 +1,26 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 
 from proyecto_final.models import db
+from login.forms import LoginForm
 
 # Create your views here.
 def index(request):
+    context = {}
     if request.user.is_authenticated:
         return render(request, 'index.html')
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = db.authenticate(type="login",username=username, password=password)
-        if user is not None:
-            print("usuario autenticado")
-            login(request, user)
-            return redirect('/')
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            nombre = request.POST['nombre']
+            password = request.POST['password']
+            user = authenticate(request, nombre=nombre, password=password)
+            if user:
+                login(request, user)
+                return redirect('/')
         else:
-            print("usuario no autenticado")
-            return render(request, 'login.html',  {"error":1})
+            context['form'] = form
     else:
-        return render(request, 'login.html')
+        form = LoginForm()
+    context['form'] = form
+    return render(request, 'login.html', context)

@@ -88,6 +88,8 @@ def loadPregunta(request):
 
 @gzip.gzip_page
 def game(request):
+    if not request.user.is_authenticated:
+        return redirect("/login")
     if request.POST:
 
         request.session["contestadas"].append(

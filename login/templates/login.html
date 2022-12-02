@@ -6,29 +6,23 @@
   <h1>Login</h1>
   <form class="form" action="" method="post">
     {% csrf_token %}
-    <label for="username">Username</label>
-    <input
-      class="input"
-      type="text"
-      name="username"
-      id="username"
-      pattern="^[A-Za-z0-9_]{3,29}$"
-      required
-    />
-    <label for="password">Password</label>
-    <input
-      class="input"
-      type="password"
-      name="password"
-      id="password"
-      pattern="^[A-Za-z0-9_]{3,29}$"
-      required
-    />
-    {% if error %}
-    <div class="alert" role="alert">
-      Ingrese un usuario y una contraseña validas
-    </div>
-    {% endif %}
+    {% for field in form %}
+      <p>
+      {{ field.label_tag }}
+      {{ field }}
+      {% if field.help_text %}
+        <small>{{ field.help_text }}</small>
+      {% endif %}
+      {% for error in field.errors %}
+        <p style="color:red">{{error}}</p>
+      {% endfor %}
+      {% if form.non_field_errors %}
+        <div style="color:red">
+          <p>{{form.non_field_errors}}</p>
+        </div>
+      {% endif %}
+      </p>
+    {% endfor %}
     <input class="button" type="submit" value="Login" />
   </form>
 </div>

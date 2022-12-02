@@ -6,9 +6,16 @@
     --color5: #142E25;
     font-family: 'Raleway', sans-serif;
 }
+
 body{
     background-color: var(--color3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
 }
+
 h1{
     font-size: 50px;
     font-weight: 600;
@@ -78,6 +85,10 @@ a::before {
 }
 
 /* ========================HEADER=========================== */
+header{
+    width: 100%;
+}
+
 #nav-pc{
     display: flex;
     box-shadow: 0 0 10px var(--color4);
@@ -161,6 +172,10 @@ a::before {
 
 .nav-login:hover{
     background-color: var(--color4);
+}
+
+.nav-login:hover a{
+    color: white;
 }
 
 .nav-register:hover{

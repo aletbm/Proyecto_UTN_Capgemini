@@ -1,0 +1,17 @@
+{% extends 'home/base.html' %} {% load static %} {% block links %}
+<link rel="stylesheet" href="{% static 'sobre_el_proyecto/css/sobre_el_proyecto.css' %}" />
+{% endblock %} {% block title %} Sobre el proyecto {% endblock %} {% block contenido %}
+
+<section class="container">
+    <div class="title">
+       <h3>Sobre el proyecto</h3>
+       <div class="title-line"></div>
+    </div>
+    
+    <div class="content">
+        Este proyecto fue realizado con una finalidad educativa para la Academia Python brindada por la empresa Capgemini en colaboracion con la UTN FRBA, en el año 2022.
+        El proyecto consiste en una pagina web que permite a los usuarios registrarse y loguearse, y poder jugar a contestar preguntas de distintos temas mediante la camara, la cual mediante la libreria mediapipe reconocera los dedos que se muestran para asi tomar su respuesta.
+        Este proyecto fue realizado por los siguientes estudiantes: Alexander Rios, Gustavo Haite Gulotta y Martin Lingeri
+    </div>
+</section>
+{% endblock %}

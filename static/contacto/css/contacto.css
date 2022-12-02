@@ -1,0 +1,50 @@
+.container{
+    margin-top: 30px;
+    height: min-content;
+    background-color: var(--color4);
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+}
+
+.title{
+    color: var(--color2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.title > h3{
+    display: block;
+    flex-basis: 40%;
+}
+
+.title-line{
+    width: 100%;
+    height: 5px;
+    background-color: var(--color2);
+}
+
+.content{
+    font-size: 16px;
+    color: var(--color2);
+    line-height: 1.5;
+}
+
+.contact-links{
+    margin-left: 32px !important;
+}
+
+.contact-links>ul>li{
+    list-style: outside;
+}
+
+.contact-a{
+    color: var(--color2) !important;
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -28,24 +28,24 @@
           </div>
           <h4 class="nav-logo-txt">GetMeFive</h4>
         </div>
-        <div class="nav-opciones">
-            <a class="nav-opcion" href="/">
-              Inicio
-              <div class="line-nav"></div>
-            </a>
-            <a class="nav-opcion" href="/">
-              Puntuaciones
-              <div class="line-nav"></div>
-            </a>
-            <a class="nav-opcion" href="/">
-              Sobre el proyecto
-              <div class="line-nav"></div>
-            </a>
-            <a class="nav-opcion" href="/">
-              Contacto
-              <div class="line-nav"></div>
-            </a>
-        </div>
+        <ul class="nav-opciones">
+          <li class="nav-opcion">
+            <a href="/">Inicio</a>
+            <div class="line-nav"></div>
+          </li>
+          <li class="nav-opcion">
+            <a href="">Puntuaciones</a>
+            <div class="line-nav"></div>
+          </li>
+          <li class="nav-opcion">
+            <a href="/sobre_el_proyecto">Sobre el proyecto</a>
+            <div class="line-nav"></div>
+          </li>
+          <li class="nav-opcion">
+            <a href="/contacto/">Contacto</a>
+            <div class="line-nav"></div>
+          </li>
+        </ul>
         {% if user.is_authenticated %}
         <a class="nav-signout" href="/signout">
             <div class="nav-signout-img">
