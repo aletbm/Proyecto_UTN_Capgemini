@@ -5,9 +5,12 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
 }
 
 .title{
@@ -16,6 +19,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: relative;
+    z-index: 9;
 }
 
 .title > h3{
@@ -33,4 +38,43 @@
     font-size: 16px;
     color: var(--color2);
     line-height: 2;
+    position: relative;
+    z-index: 10;
+}
+
+.logoGame{
+    position: absolute;
+    z-index: 5;
+    right: -100px;
+    top: 15px;
+    transform: rotate(-25deg);
+}
+
+.logoGame > img{
+    width: 600px;
+}
+
+.logos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: rgba(20, 46, 37, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 7;
+}
+
+.logo-utn > img{
+    width: 150px;
+    height: 50px;
+    object-fit: scale-down;
+}
+
+.logo-capgemini > img{
+    width: 200px;
+    height: 50px;
+    transform: translateY(5px);
+    object-fit: cover;
 }
