@@ -1,0 +1,51 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block title %} Scoring {% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'scoring/css/scoring.css'%}">
+{% endblock %}
+
+{% block contenido %}
+   <section class="scoring">
+      <div class="title-scoring">
+         <h3>Maximas Puntuaciones</h3>
+         <div class="title-line"></div>
+      </div>
+      
+      <div class="table">
+         <table>
+            <tr class="fila-titulo">
+               <th class="celda-titulo">Usuario</th>
+               <th class="celda-titulo">Puntuación</th>
+               <th class="celda-titulo">Fecha</th>
+               <th class="celda-titulo">Tema</th>
+            </tr>
+            {% for fila in tabla %}
+            <tr class="fila-puntuacion">
+               <td class="celda-puntuacion">{{ fila.0 }}</td>
+               <td class="celda-puntuacion">{{ fila.1 }}</td>
+               <td class="celda-puntuacion">{{ fila.2 }}</td>
+               <td class="celda-puntuacion">{{ fila.3 }}</td>
+            </tr>
+            {% endfor %}
+         </table>
+      </div>
+
+      <div>
+         <form action="filter" method="get">
+            <fieldset class="filter">
+               <label>Filtrar por:</label>
+               <select name="filter" class="filter-by">
+                  <option value="user">Usuario</option>
+                  <option value="tema">Tema</option>
+              </select>
+              <input type="text" name="text">
+              <input type="submit" value="Filtrar" class="button">
+            </fieldset>
+         </form>
+      </div>
+   </section>
+{% endblock %}

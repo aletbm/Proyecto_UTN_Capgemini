@@ -1,0 +1,40 @@
+.celda-titulo{
+    border: 2px solid black;
+    text-align: center;
+    padding: 15px;
+    background-color: var(--color1);
+    font-weight: bold;
+}
+
+.celda-puntuacion{
+    border: 2px solid black;
+    text-align: center;
+    padding: 15px;
+    background-color: var(--color2);
+}
+
+.table{
+    display: flex;
+    justify-content: center;
+    border-collapse: collapse;
+    margin: 15px 0px;
+}
+
+.filter{
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+.title-scoring{
+    display: flex;
+    justify-content: center;
+}
+
+.filter-by{
+    margin: 0px 5px
+}
+
+.button{
+    margin-left: 5px;
+}
