@@ -90,15 +90,19 @@ def loadPregunta(request):
 def game(request):
     if not request.user.is_authenticated:
         return redirect("/login")
+    
     if request.POST:
-
+        mirespuesta = ""
+        if int(request.POST["answer"]) == 0:
+            mirespuesta = ""
+        else:
+            mirespuesta = request.session["options"][int(request.POST["answer"]) - 1]
+                  
         request.session["contestadas"].append(
             {
                 "pregunta": request.session["question"],
                 "respuesta": request.session["options"][request.session["answer"] - 1],
-                "mirespuesta": request.session["options"][
-                    int(request.POST["answer"]) - 1
-                ],
+                "mirespuesta": mirespuesta,
             }
         )
 
