@@ -10,6 +10,7 @@ import json
 import time
 from .video import VideoCamera, streamVideo
 from .utils import readCountInTxt, timer
+from proyecto_final.models import db
 
 seed(42)
 
@@ -132,6 +133,7 @@ def loadQuestions(request, tema):
 
 
 def resultado(request):
+    validarPuntuacionMax(request)
     return render(
         request,
         "game/resultado.html",
@@ -141,6 +143,16 @@ def resultado(request):
         },
     )
 
+def validarPuntuacionMax(request):
+    puntaje = request.session["points"]
+    tema = request.session["tema"]
+    user = request.user.nombre
+    puntajeMax = db.obtenerPuntajeMax(tema,user)
+    if puntajeMax[0] == -1:
+        db.insertarPuntajeMax(tema,user,puntaje)
+    if puntajeMax[0] < puntaje:
+        db.modificarPuntajeMax(tema,user,puntaje)
+    return
 
 def video(request):
     cam = VideoCamera()

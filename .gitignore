@@ -2,3 +2,4 @@ db.sqlite3
 __pycache__
 proyecto_final/cfgDB.py
 proyecto_final/__pycache__
+*/__pycache__
