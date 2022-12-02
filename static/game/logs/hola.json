@@ -1,0 +1,55 @@
+[
+    {
+        "idGame": "bd34d23e-95c7-40fd-8ce1-a2aef6863861",
+        "date": "2022-12-02 20:17:10.060930",
+        "tema": "Deporte",
+        "cantidad": 3,
+        "jugadas": [
+            {
+                "pregunta": "\u00bfQui\u00e9n tiene m\u00e1s goles en el f\u00fatbol?",
+                "respuesta": "Cristiano Ronaldo",
+                "mirespuesta": "Lionel Messi"
+            },
+            {
+                "pregunta": "\u00bfCu\u00e1les son los cinco colores del anillo de los Juegos Ol\u00edmpicos?",
+                "respuesta": "Azul, rojo, amarillo, verde y negro",
+                "mirespuesta": "Azul, rojo, amarillo, verde y negro"
+            },
+            {
+                "pregunta": "\u00bfQui\u00e9n es el mejor boxeador de todos los tiempos?",
+                "respuesta": "Muhammad Al\u00ed",
+                "mirespuesta": "Muhammad Al\u00ed"
+            }
+        ],
+        "puntaje": 2
+    },
+    {
+        "idGame": "18be6a75-48bc-4e3b-86b7-748f7d46df80",
+        "date": "2022-12-02 20:17:42.516171",
+        "tema": "Historia",
+        "cantidad": 4,
+        "jugadas": [
+            {
+                "pregunta": "De la leyenda de R\u00f3mulo y Remo proviene tambi\u00e9n el animal tot\u00e9mico de Roma. \u00bfSabes cu\u00e1l era?",
+                "respuesta": "Una loba",
+                "mirespuesta": "Una perra"
+            },
+            {
+                "pregunta": "\u00bfQu\u00e9 l\u00edder tribal luch\u00f3 contra la ocupaci\u00f3n romana de Gran Breta\u00f1a (Britania)?",
+                "respuesta": "Boudica",
+                "mirespuesta": "Prasutagus"
+            },
+            {
+                "pregunta": "En el a\u00f1o 323 a.C. una enfermedad acab\u00f3 con la vida del conquistador del mayor imperio visto hasta entonces. \u00bfQui\u00e9n era?",
+                "respuesta": "Alejandro Magno",
+                "mirespuesta": "Le\u00f3nidas"
+            },
+            {
+                "pregunta": "\u00bfQu\u00e9 cient\u00edfico es considerado el Padre de la Bomba At\u00f3mica?",
+                "respuesta": "Robert Oppenheimer",
+                "mirespuesta": "Robert Oppenheimer"
+            }
+        ],
+        "puntaje": 1
+    }
+]

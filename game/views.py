@@ -7,10 +7,13 @@ from home.models import Pregunta
 from random import randint, seed
 import datetime as dt
 import json
+from json.decoder import JSONDecodeError
+from os.path import exists
 import time
 from .video import VideoCamera, streamVideo
 from .utils import readCountInTxt, timer
 from proyecto_final.models import db
+from uuid import uuid4
 
 seed(42)
 
@@ -93,19 +96,14 @@ def game(request):
         return redirect("/login")
     
     if request.POST:
-        mirespuesta = ""
-        if int(request.POST["answer"]) == 0:
-            mirespuesta = ""
-        else:
-            mirespuesta = request.session["options"][int(request.POST["answer"]) - 1]
-                  
-        request.session["contestadas"].append(
-            {
-                "pregunta": request.session["question"],
-                "respuesta": request.session["options"][request.session["answer"] - 1],
-                "mirespuesta": mirespuesta,
-            }
-        )
+        if int(request.POST["answer"]) != 0:
+            request.session["contestadas"].append(
+                {
+                    "pregunta": request.session["question"],
+                    "respuesta": request.session["options"][request.session["answer"] - 1],
+                    "mirespuesta": request.session["options"][int(request.POST["answer"]) - 1],
+                }
+            )
 
         if int(request.POST["answer"]) == request.session["answer"]:
             request.session["points"] += 1
@@ -127,6 +125,7 @@ def loadQuestions(request, tema):
     request.session["tema"] = tema
     request.session["timeStart"] = str(dt.datetime.now())
     request.session["contestadas"] = []
+    request.session["idGame"] = str(uuid4())
     getPreguntas(request)
     loadPregunta(request)
     return redirect("/game/")
@@ -134,6 +133,7 @@ def loadQuestions(request, tema):
 
 def resultado(request):
     validarPuntuacionMax(request)
+    saveHistorial(request)
     return render(
         request,
         "game/resultado.html",
@@ -142,6 +142,7 @@ def resultado(request):
             "puntuacion": request.session["points"],
         },
     )
+
 
 def validarPuntuacionMax(request):
     puntaje = request.session["points"]
@@ -153,6 +154,38 @@ def validarPuntuacionMax(request):
     if puntajeMax[0] < puntaje:
         db.modificarPuntajeMax(tema,user,puntaje)
     return
+
+def saveHistorial(request):
+    path = f'./static/game/logs/{request.user.nombre}.json'
+    data = {}
+    dataOld = False
+    mode = "a"
+    
+    if exists(path):
+        mode = "w"
+        with open(path, 'rb') as jsonFile:
+            try:
+                dataOld = json.load(jsonFile)
+                for row in dataOld:
+                    if row["idGame"] == request.session["idGame"]:
+                        return
+            except JSONDecodeError:
+                pass
+        
+    with open(path, mode) as jsonFile:
+        data["idGame"] = request.session["idGame"]
+        data["date"] = str(dt.datetime.now())
+        data["tema"] = request.session["tema"]
+        data["cantidad"] = len(request.session["contestadas"])
+        data["jugadas"] = request.session["contestadas"]
+        data["puntaje"] = request.session["points"]
+        if dataOld:
+            dataOld.append(data)
+        else:
+            dataOld = [data]
+        json.dump(dataOld, jsonFile, indent=4)
+    return
+    
 
 def video(request):
     cam = VideoCamera()
