@@ -1,0 +1,30 @@
+{% extends 'home/base.html' %} {% load static %} {% block links %}
+<link rel="stylesheet" href="{% static 'gestionar_mi_perfil/css/cambio_contrasenia.css' %}" />
+{% endblock %} {% block title %} Gestionar mi perfil {% endblock %} {% block contenido %}
+
+<div class="form-container">
+  <h1>Cambiar contraseña</h1>
+  <form class="form" action="" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+      {{ field.label_tag }}
+      {{ field }}
+      {% if field.help_text %}
+        <small>{{ field.help_text }}</small>
+      {% endif %}
+      {% for error in field.errors %}
+        <p class="alert">{{error}}</p>
+      {% endfor %}
+      {% if form.non_field_errors %}
+        <div class="alert">
+          <p>{{form.non_field_errors}}</p>
+        </div>
+      {% endif %}
+      </p>
+    {% endfor %}
+    <input class="button" type="submit" value="Guardar cambios" />
+  </form>
+</div>
+
+{% endblock %}

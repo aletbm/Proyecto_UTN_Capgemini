@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     "sobre_el_proyecto",
     "contacto",
     "custom_user",
+    "scoring",
+    "gestionar_mi_perfil",
 ]
 
 
