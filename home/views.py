@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from .models import Tema
+from proyecto_final.models import db
 
 
 def index(request):
     temas = []
-    for p in Tema.objects.raw("SELECT * FROM tema"):
-        temas.append(p.tema)
+    for p in db.getTemas():
+        temas.append(p[1])
     return render(request, "home/index.html", {"temas": temas})

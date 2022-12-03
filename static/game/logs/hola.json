@@ -51,5 +51,63 @@
             }
         ],
         "puntaje": 1
+    },
+    {
+        "idGame": "dfe46328-21d0-46fa-b6ae-c3bdcb6a1816",
+        "date": "2022-12-02 20:39:42.960621",
+        "tema": "Historia",
+        "cantidad": 4,
+        "jugadas": [
+            {
+                "pregunta": "De la leyenda de R\u00f3mulo y Remo proviene tambi\u00e9n el animal tot\u00e9mico de Roma. \u00bfSabes cu\u00e1l era?",
+                "respuesta": "Una loba",
+                "mirespuesta": "Una perra"
+            },
+            {
+                "pregunta": "\u00bfQu\u00e9 l\u00edder tribal luch\u00f3 contra la ocupaci\u00f3n romana de Gran Breta\u00f1a (Britania)?",
+                "respuesta": "Boudica",
+                "mirespuesta": "Prasutagus"
+            },
+            {
+                "pregunta": "En el a\u00f1o 323 a.C. una enfermedad acab\u00f3 con la vida del conquistador del mayor imperio visto hasta entonces. \u00bfQui\u00e9n era?",
+                "respuesta": "Alejandro Magno",
+                "mirespuesta": "Julio C\u00e9sar"
+            },
+            {
+                "pregunta": "\u00bfQu\u00e9 cient\u00edfico es considerado el Padre de la Bomba At\u00f3mica?",
+                "respuesta": "Robert Oppenheimer",
+                "mirespuesta": "Albert Einstein"
+            }
+        ],
+        "puntaje": 0
+    },
+    {
+        "idGame": "40362023-cca8-4a4c-8914-84e526a4d03a",
+        "date": "2022-12-02 20:49:10.756013",
+        "tema": "Deporte",
+        "cantidad": 4,
+        "jugadas": [
+            {
+                "pregunta": "\u00bfManny Pacquiao es un boxeador legendario de qu\u00e9 pa\u00eds?",
+                "respuesta": "Filipinas",
+                "mirespuesta": "Filipinas"
+            },
+            {
+                "pregunta": "\u00bfQu\u00e9 equipo de la NBA tiene la racha ganadora m\u00e1s larga?",
+                "respuesta": "LA Lakers",
+                "mirespuesta": "LA Lakers"
+            },
+            {
+                "pregunta": "\u00bfCu\u00e1ntas veces Michael Jordan gan\u00f3 campeonatos para los Chicago Bulls?",
+                "respuesta": "6",
+                "mirespuesta": "5"
+            },
+            {
+                "pregunta": "\u00bfCu\u00e1les son los cinco colores del anillo de los Juegos Ol\u00edmpicos?",
+                "respuesta": "Azul, rojo, amarillo, verde y negro",
+                "mirespuesta": "\u00cdndigo, rojo, morado, verde y negro"
+            }
+        ],
+        "puntaje": 2
     }
 ]

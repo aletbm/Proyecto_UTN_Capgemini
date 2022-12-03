@@ -13,18 +13,51 @@
     </div>
 
     <div class="logos">
-        <div class="logo-capgemini">
+        <div id="logo-capgemini">
             <img src="{% static 'media/sobre_el_proyecto/Capgemini-Logo.png' %}" alt="Logo Capgemini">
         </div>
-        <div class="logo-utn">
+        <div id="logo-utn">
             <img src="{% static 'media/sobre_el_proyecto/utn.png' %}" alt="Logo UTN"></div>
         </div>
     </div>
     
     <div class="content">
         Este proyecto fue realizado con una finalidad educativa para la Academia Python brindada por la empresa Capgemini en colaboracion con la UTN FRBA, en el año 2022.
-        El proyecto consiste en una pagina web que permite a los usuarios registrarse y loguearse, y poder jugar a contestar preguntas de distintos temas mediante la camara, la cual mediante la libreria mediapipe reconocera los dedos que se muestran para asi tomar su respuesta.
-        Este proyecto fue realizado por los siguientes estudiantes: Alexander Rios, Gustavo Haite Gulotta y Martin Lingeri
+        El proyecto consiste en una pagina web que permite a los usuarios registrarse y loguearse, y poder jugar a contestar preguntas de distintos temas mediante la camara
+    </div>
+</section>
+<section class="contenedor">
+    <h3 class="title">Reconocimiento de la mano con OpenCV y MediaPipe</h3>
+    <div class="logos logo-w">
+        <div id="logo-opencv">
+            <img src="{% static 'media/sobre_el_proyecto/opencv.png' %}" alt="Logo OpenCV">
+        </div>
+        <div id="logo-mediapipe">
+            <img src="{% static 'media/sobre_el_proyecto/mediapipe.svg' %}" alt="Logo Mediapipe">
+        </div>
+    </div>
+    <div class="content">
+        <div class="block">
+            <div class="info-content">
+                Este proyecto fue posible gracias a OpenCV, una libreria enfocada en la vision artificial en tiempo real.
+                OpenCV es capaz de capturar frames directamente desde una camara, apartir de esto procedemos a trabajar sobre dicho frame 
+                con herramientas que la misma libreria nos proporciona, los diferentes procesamientos que podemos realizar sobre la imagen
+                son diversos, entre ellos, redimensionamientos, cambios de escalas de color, difuminacion, deteccion de bordes, etc.
+            </div>
+            <img id="opencvGif" src="{% static 'media/sobre_el_proyecto/opencv-video.gif' %}" alt="">
+        </div>
+        <div class="block">
+            <img id="mediapipeGif" src="{% static 'media/sobre_el_proyecto/hand_tracking.gif' %}" alt="">
+            <div class="info-content">
+                Una vez obtenidos y procesados estos frames con OpenCV, la libreria MediaPipe nos brinda las herramientas necesarias
+                para percibir la forma y el movimiento de las manos. Esta libreria utiliza un pipeline de ML que consta de varios modelos
+                que trabajan juntos. MediaPipe utiliza modelos de ML que detectan la palma de la mano y genera un corte preciso
+                de la mano apartir de la posicion de esta, para posteriormente realizar una localizacion precisa de 21 puntos claves dentro de la mano.
+                Finalmente MediaPipe nos entrega una lista que contiene informacion de la posicion de estos 21 puntos y si la mano es derecha o izquierda.
+                Con estos datos fuimos capaces de detectar señales realizadas con las manos, tanto para la eleccion dentro de una lista de opciones de posibles respuestas a una pregunta
+                como la determinacion final del envio de una respuesta.
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}

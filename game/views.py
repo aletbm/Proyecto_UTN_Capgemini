@@ -3,7 +3,6 @@ from django.views.decorators import gzip
 from django.shortcuts import render, redirect
 from django.views import View
 from django.core.serializers.json import DjangoJSONEncoder
-from home.models import Pregunta
 from random import randint, seed
 import datetime as dt
 import json
@@ -49,18 +48,16 @@ def event_stream(request):
 # ==================== VISTAS ====================
 def getPreguntas(request):
     preguntas = []
-    for p in Pregunta.objects.raw(
-        f"SELECT * FROM pregunta JOIN tema ON tema.idTema = pregunta.Tema_idTema WHERE Tema='{request.session['tema']}';"
-    ):
+    for p in db.getPreguntas(request.session["tema"]):
         preguntas.append(
             {
-                "pregunta": p.pregunta,
-                "respuesta": p.respuesta,
-                "opcion1": p.opcion1,
-                "opcion2": p.opcion2,
-                "opcion3": p.opcion3,
-                "opcion4": p.opcion4,
-                "opcion5": p.opcion5,
+                "pregunta": p[2],
+                "respuesta": p[1],
+                "opcion1": p[3],
+                "opcion2": p[4],
+                "opcion3": p[5],
+                "opcion4": p[6],
+                "opcion5": p[7],
             }
         )
     request.session["preguntas"] = preguntas.copy()
@@ -154,6 +151,7 @@ def validarPuntuacionMax(request):
     if puntajeMax[0] < puntaje:
         db.modificarPuntajeMax(tema,user,puntaje)
     return
+
 
 def saveHistorial(request):
     path = f'./static/game/logs/{request.user.nombre}.json'

@@ -40,6 +40,14 @@
     line-height: 2;
     position: relative;
     z-index: 10;
+    background-color: rgba(20, 46, 37, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
 }
 
 .logoGame{
@@ -51,7 +59,7 @@
 }
 
 .logoGame > img{
-    width: 600px;
+    width: 500px;
 }
 
 .logos{
@@ -66,15 +74,52 @@
     z-index: 7;
 }
 
-.logo-utn > img{
+.logo-w{
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+#logo-utn > img{
     width: 150px;
     height: 50px;
     object-fit: scale-down;
 }
 
-.logo-capgemini > img{
+#logo-capgemini > img{
     width: 200px;
     height: 50px;
     transform: translateY(5px);
     object-fit: cover;
+}
+
+#logo-mediapipe > img{
+    width: 200px;
+    height: 50px;
+    object-fit: cover;
+}
+
+#logo-opencv > img{
+    width: 100px;
+    object-fit: cover;
+}
+
+.content > img {
+    height: 400px;
+}
+
+.block{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    height: 300px;
+}
+
+#opencvGif{
+    height: 100%;
+    width: 50%;
+    object-fit: cover;
+}
+
+#mediapipeGif{
+    height: 100%;
 }

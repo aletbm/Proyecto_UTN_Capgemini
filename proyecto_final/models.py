@@ -132,5 +132,25 @@ class TP():
             print("Error al insertar puntaje")
             raise
         return
+    
+    def getPreguntas(self, tema):
+        query = f"SELECT * FROM pregunta JOIN tema ON tema.idTema = pregunta.Tema_idTema WHERE Tema='{tema}'"
+        try:
+            self.cursor.execute(query)
+            preguntas = self.cursor.fetchall()
+            return preguntas
+        except Exception as e:
+                print("Error al modificar puntaje máximo")
+                raise
+            
+    def getTemas(self):
+        query = "SELECT * FROM tema"
+        try:
+            self.cursor.execute(query)
+            temas = self.cursor.fetchall()
+            return temas
+        except Exception as e:
+                print("Error al modificar puntaje máximo")
+                raise
         
 db = TP()
