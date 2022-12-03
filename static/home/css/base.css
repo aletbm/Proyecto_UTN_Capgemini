@@ -265,6 +265,7 @@ footer{
     position: relative;
     bottom: 0;
     width: 100%;
+    
 }
 
 #myfooter{
@@ -274,10 +275,11 @@ footer{
     justify-content: space-around;
     align-self: center;
     bottom: 0;
+    gap: 30px;
 }
 
 .myfooter-img{
-    flex-basis: 10%;
+    flex-basis: 15%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -285,7 +287,7 @@ footer{
 }
 
 .myfooter-img > img{
-    width: 60px;
+    width: 80px;
 }
 
 .myfooter-info{
@@ -339,4 +341,19 @@ footer{
         background-color: var(--color5);
         transform: scale(1.1) rotate(0deg);
     }
+}
+
+.logos-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#UTNFooter > img{
+    width: 125px;
+}
+
+#CapgeminiFooter > img{
+    width: 125px;
 }

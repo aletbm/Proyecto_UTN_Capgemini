@@ -13,6 +13,10 @@
     overflow: hidden;
 }
 
+.m-top{
+    margin-top: 40px;
+}
+
 .title{
     color: var(--color2);
     display: flex;
@@ -102,6 +106,18 @@
     object-fit: cover;
 }
 
+#logo-django > img{
+    width: 125px;
+    height: 50px;
+    object-fit: cover;
+}
+
+#logo-mysql > img{
+    width: 125px;
+    object-fit: cover;
+}
+
+
 .content > img {
     height: 400px;
 }
@@ -122,4 +138,8 @@
 
 #mediapipeGif{
     height: 100%;
+}
+
+#mtv{
+    width: 50%;
 }
