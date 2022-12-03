@@ -2,15 +2,24 @@
 <link rel="stylesheet" href="{% static 'gestionar_mi_perfil/css/gestionar_mi_perfil.css' %}" />
 {% endblock %} {% block title %} Gestionar mi perfil {% endblock %} {% block contenido %}
 
-<div>
-  <h1>Gestionar mi perfil</h1>
-  <div>
-    <h3>Nombre: {{user.nombre}}</h3>
-    <h3>País: {{country}}</h3>
+<div class="contenedor">
+  <div class="title">
+    <h3>Gestionar mi perfil</h3>
+    <div class="title-line"></div>
+ </div>
+  <div class="content">
+    <div class="data-perfil">
+      <h3 class="data-perfil-title">Datos del perfil</h3>
+      <div class="perfil-line"></div>
+      <h3>Nombre: {{user.nombre}}</h3>
+      <h3>País: {{country}}</h3>
+    </div>
+    <div class="editar-perfil">
+      <h3>Editar perfil</h3>
+      <a href="/gestionar_mi_perfil/cambio_nombre_y_pais">Editar nombre y pais</a>
+      <a href="/gestionar_mi_perfil/cambio_contrasenia">Cambiar contraseña</a>
+    </div>
   </div>
-  <a href="/gestionar_mi_perfil/cambio_nombre_y_pais">Editar nombre y pais</a>
-  <a href="/gestionar_mi_perfil/cambio_contrasenia">Cambiar contraseña</a>
-  </form>
 </div>
 
 {% endblock %}
