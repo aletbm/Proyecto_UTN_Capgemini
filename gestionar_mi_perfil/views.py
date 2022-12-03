@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.contrib import messages
 
 from proyecto_final.models import db
 
@@ -43,8 +45,10 @@ def updateContrasenia(request):
     if request.POST:
         form = UpdateCustomUserPassword(request.user, data=request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
             db.updateContrasenia(username=request.user.nombre, password=request.POST['new_password1'])
+            login(request, user)
+            messages.success(request, 'Contraseña actualizada correctamente')
             redirect('/')
     else:
         form = UpdateCustomUserPassword(user=request.user)
