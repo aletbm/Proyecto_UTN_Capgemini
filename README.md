@@ -76,4 +76,4 @@ python manage.py runserver
 A continuación abra su navegador de preferencia e ingrese a la siguiente url http://127.0.0.1:8000/ si todo va bien debería visualizar la página principal.
 
 ### 👁️ Vista previa:
-<img src="https://drive.google.com/uc?export=view&id=1--01ECntnekHhhDQ0fZorHtQpbaTXufu" alt="alt text" title="image Title" />
+![Preview](https://drive.google.com/uc?export=view&id=1--01ECntnekHhhDQ0fZorHtQpbaTXufu)
