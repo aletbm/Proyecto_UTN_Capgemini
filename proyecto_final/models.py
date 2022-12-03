@@ -25,6 +25,34 @@ class TP():
         except Exception as e:
             print("Error al crear el usuario")
 
+    def updateNombreYCountry(self,username,country):
+        query = f"""
+                    UPDATE usuario 
+                    SET nombre = "{ username }", Countries_idCountries = { country }
+                    WHERE nombre = "{ username }"
+                    """
+        try:
+            self.cursor.execute(query)
+            self.connection.commit()
+            return
+        except Exception as e:
+            print("Error al modificar nombre y country")
+            raise
+
+    def updateContrasenia(self,username,password):
+        query = f"""
+                    UPDATE usuario 
+                    SET contrasenia = "{ password }"
+                    WHERE nombre = "{ username }"
+                    """
+        try:
+            self.cursor.execute(query)
+            self.connection.commit()
+            return
+        except Exception as e:
+            print("Error al modificar contraseña")
+            raise
+
     def obtenerTabla(self):
         query = """
                 SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema FROM usuario 
