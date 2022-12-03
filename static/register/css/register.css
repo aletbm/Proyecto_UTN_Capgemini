@@ -6,6 +6,10 @@
     gap: 1rem;
 }
 
+.form-container > h1{
+    color: var(--color5);
+}
+
 .form{
     display: flex;
     flex-direction: column;

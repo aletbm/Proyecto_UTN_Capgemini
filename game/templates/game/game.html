@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Juego{% endblock %}
 
 {% block links %}
 <link rel="stylesheet" href="{% static 'game/css/game.css'%}">
@@ -23,15 +23,11 @@
     </div>
     <div class="opciones">
       <ol class="rounded-list">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
       </ol>
     </div>
     <div class="time">
-      La pregunta finalizara en: <span id="seconds"></span> segundos
+      <div>El juego finalizara en: <span id="seconds"></span></div>
+      <div id="endGame" onclick="endGameSubmit()">Terminar intento</div>
     </div>
     <div class="answer_box">
       <h3 class="answer_title">Tu respuesta sera:</h3>

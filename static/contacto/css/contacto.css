@@ -1,5 +1,4 @@
-.container{
-    margin-top: 30px;
+.contenedor{
     height: min-content;
     background-color: var(--color4);
     padding: 30px;
@@ -33,18 +32,74 @@
     font-size: 16px;
     color: var(--color2);
     line-height: 1.5;
+    display: flex;
+    gap: 20px;
+    width: 100%;
 }
 
-.contact-links{
-    margin-left: 32px !important;
+.card{
+    flex-basis: calc(100%/3);
+    background-color: var(--color5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.img-card > img{
+    width: 200px;
+}
+
+.info-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.text-info{
+    text-align: center;
+
+}
+
+.card-line{
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 47%, rgba(255,255,255,0) 100%);
+}
+
+.contact-links > ul{
+    display: flex;
+    gap: 20px;
 }
 
 .contact-links>ul>li{
-    list-style: outside;
+    list-style: none;
 }
 
 .contact-a{
     color: var(--color2) !important;
     cursor: pointer;
     text-decoration: underline;
+}
+
+.contact-a > img{
+    width: 40px;
+}
+
+.contact-a:hover{
+    animation: scaleRotate 0.2s forwards ease-in-out
+}
+
+@keyframes scaleRotate {
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(1.1) rotate(5deg);
+    }
+    
 }

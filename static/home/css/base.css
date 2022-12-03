@@ -105,11 +105,11 @@ header{
     justify-content: center;
     align-items: center;
     flex-basis: 15%;
-    padding: 0 10px;
+    padding: 0 15px;
 }
 
 .nav-logo-img{
-    padding: 0 10px;
+    padding-right:10px;
 }
 
 .nav-logo-img > img{
@@ -199,6 +199,17 @@ header{
 .mymain{
     padding-top: 100px;
     padding-bottom: 40px;
+    opacity: 0;
+    animation: opac 0.5s forwards;
+}
+
+@keyframes opac {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 /* ========================FOOTER=========================== */
 
@@ -303,8 +314,6 @@ footer{
 }
 
 .btn{
-    width: 80px;
-    height: 40px;
     border-radius: 10px;
     display: flex;
     justify-content: center;

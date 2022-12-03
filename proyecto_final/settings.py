@@ -8,6 +8,15 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
+
+pip install mysqlclient
+pip install mediapipe
+pip install django
+pip install opencv-python
+
+pip manage.py makemigrations
+pip manage.py migrate
+
 """
 
 from pathlib import Path
@@ -88,7 +97,7 @@ AUTH_USER_MODEL = "custom_user.CustomUser"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-# pip install mysqlclient 
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
@@ -123,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "es-eu"
 
 TIME_ZONE = "UTC"
 

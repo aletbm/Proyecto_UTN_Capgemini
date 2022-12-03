@@ -1,0 +1,40 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block title %}Resultados{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'game/css/resultado.css'%}">
+{% endblock %}
+
+{% block contenido %}
+<h1 class="title-respuestas">Respuestas</h1>
+<section class="resultados">
+    <table class="resultados-table">
+        <tr class="resultados-head">
+            <th class="resultados-celda">Preguntas</th>
+            <th class="resultados-celda">Respuestas Correctas</th>
+            <th class="resultados-celda">Tus respuestas</th>
+        </tr>
+        {% for resultado in resultados%}
+        <tr class="resultados-row">
+            <td class="resultados-celda">{{resultado.pregunta}}</td>
+            <td class="resultados-celda">{{resultado.respuesta}}</td>
+            {% if resultado.mirespuesta == resultado.respuesta%}
+                <td class="resultados-celda correcta">{{resultado.mirespuesta}}</td>
+            {% else %}
+                <td class="resultados-celda incorrecta">{{resultado.mirespuesta}}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+<section class="puntacion-container">
+    <div class="puntacion">
+        <h3>Tu puntuacion es: {{puntuacion}}</h3>
+        <a class="btn btn-game" href="/">Volver al inicio</a>
+    </div>
+</section> 
+{% endblock %}

@@ -34,7 +34,7 @@
             <div class="line-nav"></div>
           </li>
           <li class="nav-opcion">
-            <a href="">Puntuaciones</a>
+            <a href="/scoring">Puntuaciones</a>
             <div class="line-nav"></div>
           </li>
           <li class="nav-opcion">
@@ -47,19 +47,15 @@
           </li>
         </ul>
         {% if user.is_authenticated %}
-        <div class="nav-signout">
-          <div class="nav-signout-img">
-            <img src="{% static 'media/home/log-in.png' %}" alt="" />
-          </div>
-          <a href="/signout">Logout</a>
-        </div>
+        <a class="nav-signout" href="/signout">
+            <div class="nav-signout-img">
+              <img src="{% static 'media/home/log-in.png' %}" alt="" />
+            </div>
+          Logout
+        </a>
         {% else %}
-        <div class="nav-register">
-          <a href="/register">Register</a>
-        </div>
-        <div class="nav-login">
-          <a href="/login">Login</a>
-        </div>
+        <a class="nav-register" href="/register">Registro</a>
+          <a class="nav-login" href="/login">Login</a>
         {% endif %}
       </nav>
     </header>
@@ -118,7 +114,7 @@
               <a href="/gestionar_mi_perfil" title="">Gestionar Mi Perfil</a>
             </li>
             <li class="myfooter-info-link">
-              <a href="" title="Gestionar Mi Perfil">Repositorio</a>
+              <a href="https://github.com/aletbm/Proyecto_UTN_Capgemini" title="Gestionar Mi Perfil">Repositorio</a>
             </li>
             <li class="myfooter-info-link">
               <a href="" title="Legal">Legal</a>

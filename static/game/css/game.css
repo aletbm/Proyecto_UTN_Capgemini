@@ -121,9 +121,13 @@ ol{
     background-color: var(--color5);
     padding: 10px;
     margin-bottom: 0.6em;
-    border-radius: .3em;
+    border-radius: 10px;
     color: var(--color2);
     font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 #seconds{
@@ -131,6 +135,28 @@ ol{
     background-color: var(--color4);
     border-radius: 50%;
     padding: 5px;
+}
+
+#endGame{
+    font-size: 15px;
+    background-color: var(--color1);
+    padding: 10px;
+    margin-bottom: 4px;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0px 4px 0 var(--color4);
+}
+
+#endGame:hover{
+    background-color: rgb(255, 83, 83);
+    box-shadow: 0px 4px 0 rgb(130, 0, 0);
+}
+
+#endGame:active{
+    transform: translateY(2px);
+    background-color: rgb(181, 0, 0);
+    box-shadow: 0px 2px 0 rgb(88, 0, 0);
 }
 
 .selected-option{
@@ -228,4 +254,8 @@ ol{
     {
     transform:rotate(405deg);
     }
+}
+
+.noVisible{
+    display: none;
 }

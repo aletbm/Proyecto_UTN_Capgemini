@@ -1,6 +1,7 @@
 from django.db import models
 import pymysql
 from .cfgDB import password, user
+from datetime import datetime
 
 class TP():
     def __init__(self):
@@ -117,4 +118,67 @@ class TP():
                 print("Error al obtener puntaje máximo")
                 raise
 
+    def modificarPuntajeMax(self,tema,user,puntaje):
+        query = f"""
+                    UPDATE puntuacionmax 
+                    JOIN usuario ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario 
+                    JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema
+                    SET puntuacionmax.puntuacion = { puntaje }, puntuacionmax.fecha = '{datetime.now()}'
+                    WHERE usuario.nombre = "{ user }" and tema.Tema = "{ tema }"
+                    """
+        try:
+            self.cursor.execute(query)
+            self.connection.commit()
+            return
+        except Exception as e:
+                print("Error al modificar puntaje máximo")
+                raise
+
+    def insertarPuntajeMax(self,tema,user,puntaje):
+        query = f"SELECT idTema FROM tema where tema.Tema = '{ tema }' "
+        try:
+            self.cursor.execute(query)
+            idTema = self.cursor.fetchone()
+        except Exception as e:
+                print("Error al obtener el id del tema")
+                raise
+        query = f"SELECT idUsuario FROM usuario where usuario.nombre = '{user}'"
+        try:
+            self.cursor.execute(query)
+            idUser = self.cursor.fetchone()
+        except Exception as e:
+                print("Error al obtener el id del usuario")
+                raise
+        query = f"""
+                INSERT INTO puntuacionmax (puntuacion,fecha, Tema_idTema, Usuario_idUsuario) 
+                VALUES ({puntaje},'{datetime.now()}' ,{idTema[0]},{idUser[0]})
+                """
+        try:  
+            self.cursor.execute(query)
+            self.connection.commit()
+        except Exception as e:
+            print("Error al insertar puntaje")
+            raise
+        return
+    
+    def getPreguntas(self, tema):
+        query = f"SELECT * FROM pregunta JOIN tema ON tema.idTema = pregunta.Tema_idTema WHERE Tema='{tema}'"
+        try:
+            self.cursor.execute(query)
+            preguntas = self.cursor.fetchall()
+            return preguntas
+        except Exception as e:
+                print("Error al modificar puntaje máximo")
+                raise
+            
+    def getTemas(self):
+        query = "SELECT * FROM tema"
+        try:
+            self.cursor.execute(query)
+            temas = self.cursor.fetchall()
+            return temas
+        except Exception as e:
+                print("Error al modificar puntaje máximo")
+                raise
+        
 db = TP()

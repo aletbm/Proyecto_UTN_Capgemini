@@ -1,14 +1,16 @@
-.container{
-    margin-top: 30px;
+.contenedor{
     height: min-content;
     background-color: var(--color4);
     padding: 30px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
 }
 
 .title{
@@ -17,6 +19,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: relative;
+    z-index: 9;
 }
 
 .title > h3{
@@ -34,4 +38,88 @@
     font-size: 16px;
     color: var(--color2);
     line-height: 2;
+    position: relative;
+    z-index: 10;
+    background-color: rgba(20, 46, 37, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.logoGame{
+    position: absolute;
+    z-index: 5;
+    right: -100px;
+    top: 15px;
+    transform: rotate(-25deg);
+}
+
+.logoGame > img{
+    width: 500px;
+}
+
+.logos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: rgba(20, 46, 37, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 7;
+}
+
+.logo-w{
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+#logo-utn > img{
+    width: 150px;
+    height: 50px;
+    object-fit: scale-down;
+}
+
+#logo-capgemini > img{
+    width: 200px;
+    height: 50px;
+    transform: translateY(5px);
+    object-fit: cover;
+}
+
+#logo-mediapipe > img{
+    width: 200px;
+    height: 50px;
+    object-fit: cover;
+}
+
+#logo-opencv > img{
+    width: 100px;
+    object-fit: cover;
+}
+
+.content > img {
+    height: 400px;
+}
+
+.block{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    height: 300px;
+}
+
+#opencvGif{
+    height: 100%;
+    width: 50%;
+    object-fit: cover;
+}
+
+#mediapipeGif{
+    height: 100%;
 }
