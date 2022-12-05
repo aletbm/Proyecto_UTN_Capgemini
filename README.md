@@ -57,7 +57,7 @@ pip install mysqlclient==2.1.1
 Ademas, debemos instalar el servidor para MySQL.
 
 #### ✏️ Variables de entorno:
-Ante de proceder con la ejecucion del servidor debemos configurar el archivo cfgDB.py dentro de la app-raiz 'proyecto_final' que configura el acceso al servidor de MySQL:
+Antes de proceder con la ejecucion del servidor debemos configurar un archivo cfgDB.py dentro de la app-raiz 'proyecto_final' para configura el acceso al servidor de MySQL con las siguiente credenciales:
 
 ```
 password = "YOUR_PASSWORD"
