@@ -25,11 +25,11 @@ class TP():
         except Exception as e:
             print("Error al crear el usuario")
 
-    def updateNombreYCountry(self,username,country):
+    def updateNombreYCountry(self, username, country, oldUsername):
         query = f"""
                     UPDATE usuario 
                     SET nombre = "{ username }", Countries_idCountries = { country }
-                    WHERE nombre = "{ username }"
+                    WHERE nombre = "{ oldUsername }"
                     """
         try:
             self.cursor.execute(query)

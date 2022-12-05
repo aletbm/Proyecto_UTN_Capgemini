@@ -21,10 +21,11 @@ def updateNombreYCountry(request):
     context={}
 
     if request.POST:
+        oldUsername = request.user.nombre
         form = UpdateCustomUserData(request.POST, instance=request.user)
         if form.is_valid():
             user = form.save()
-            db.updateNombreYCountry(username=request.POST['nombre'], country=request.POST['country'])
+            db.updateNombreYCountry(username=request.POST['nombre'], country=request.POST['country'], oldUsername=oldUsername)
             login(request, user)
             messages.success(request, 'Datos actualizados correctamente')
             redirect('/')

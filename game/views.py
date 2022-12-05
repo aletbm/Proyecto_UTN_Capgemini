@@ -67,6 +67,7 @@ def validarPuntuacionMax(request):
         db.modificarPuntajeMax(tema,user,puntaje)
     return
 
+
 def event_stream(request):
     while True:
         submit = False
@@ -97,9 +98,10 @@ def event_stream(request):
 # ==================== VISTAS ====================
 @gzip.gzip_page
 def game(request):
+    
     if not request.user.is_authenticated:
         return redirect("/login")
-        
+    
     if request.POST:
         if int(request.POST["answer"]) != 0:
             request.session["contestadas"].append(
@@ -128,6 +130,7 @@ def loadQuestions(request, tema):
     request.session["timeStart"] = str(dt.datetime.now())
     request.session["contestadas"] = []
     request.session["idGame"] = str(uuid4())
+    
     getPreguntas(request)
     loadPregunta(request)
     return redirect("/game/")

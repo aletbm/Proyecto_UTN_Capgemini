@@ -19,7 +19,10 @@ def readCountInTxt(path):
 
 def timer(start, m, s):
     timeEnd = dt.datetime.strptime(start, "%Y-%m-%d %H:%M:%S.%f") + dt.timedelta(minutes=m, seconds=s)
-    return timeEnd - dt.datetime.now()
+    if timeEnd < dt.datetime.now():
+        return "0:00:00"
+    else:
+        return timeEnd - dt.datetime.now()
 
 
 def saveHistorial(request):
