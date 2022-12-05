@@ -2,6 +2,13 @@
 <link rel="stylesheet" href="{% static 'gestionar_mi_perfil/css/gestionar_mi_perfil.css' %}" />
 {% endblock %} {% block title %} Gestionar mi perfil {% endblock %} {% block contenido %}
 
+{% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+      {% endfor %}
+  </ul>
+{% endif %}
 <div class="contenedor">
   <div class="title">
     <h3>Gestionar mi perfil</h3>

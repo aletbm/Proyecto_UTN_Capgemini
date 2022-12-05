@@ -66,3 +66,11 @@
 .editar-perfil > a{
     color: var(--color3);
 }
+
+.messages{
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
