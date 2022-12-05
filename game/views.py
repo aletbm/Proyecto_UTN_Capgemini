@@ -91,7 +91,7 @@ def loadPregunta(request):
 def game(request):
     if not request.user.is_authenticated:
         return redirect("/login")
-    
+        
     if request.POST:
         if int(request.POST["answer"]) != 0:
             request.session["contestadas"].append(
@@ -105,13 +105,10 @@ def game(request):
         if int(request.POST["answer"]) == request.session["answer"]:
             request.session["points"] += 1
 
-        if len(request.session["preguntas"]) > 0:
+        if len(request.session["preguntas"]) > 0 and "endGame" not in request.POST:
             loadPregunta(request)
         else:
             return redirect("/game/resultado")
-
-        if "endGame" in request.POST:
-            return redirect("/game/resultado/")
 
     return render(request, "game/game.html")
 
