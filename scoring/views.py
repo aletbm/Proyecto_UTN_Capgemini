@@ -12,4 +12,6 @@ def filter(request):
         tabla = db.filterByUser(text)
     if type == "tema":
         tabla = db.filterByTema(text)
+    if type == "pais":
+        tabla = db.filterByCountry(text)
     return render(request, 'scoring.html', {"tabla":tabla})

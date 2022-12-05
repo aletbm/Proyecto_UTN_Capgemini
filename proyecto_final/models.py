@@ -55,9 +55,10 @@ class TP():
 
     def obtenerTabla(self):
         query = """
-                SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema FROM usuario 
-                JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario 
-                JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema 
+                SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema, countries.name FROM usuario
+                JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario
+                JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema
+                JOIN countries ON countries.idCountries = usuario.countries_idCountries
                 order by  puntuacionmax.puntuacion desc
                 """
         try:
@@ -90,6 +91,23 @@ class TP():
                     JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario
                     JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema
                     where usuario.nombre = "{ text }" 
+                    order by  puntuacionmax.puntuacion desc
+                    """
+        try:
+            self.cursor.execute(query)
+            tabla = self.cursor.fetchall()
+            return tabla
+        except Exception as e:
+                print("Error al filtrar")
+                raise
+
+    def filterByCountry(self,text):
+        query  = f"""
+                    SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema, countries.name FROM usuario
+                    JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario
+                    JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema
+                    JOIN countries ON countries.idCountries = usuario.countries_idCountries
+                    where countries.name = "{text}"
                     order by  puntuacionmax.puntuacion desc
                     """
         try:

@@ -22,6 +22,7 @@
                <th class="celda-titulo">Puntuación</th>
                <th class="celda-titulo">Fecha</th>
                <th class="celda-titulo">Tema</th>
+               <th class="celda-titulo">País</th>
             </tr>
             {% for fila in tabla %}
             <tr class="fila-puntuacion">
@@ -29,6 +30,7 @@
                <td class="celda-puntuacion">{{ fila.1 }}</td>
                <td class="celda-puntuacion">{{ fila.2 }}</td>
                <td class="celda-puntuacion">{{ fila.3 }}</td>
+               <td class="celda-puntuacion">{{ fila.4 }}</td>
             </tr>
             {% endfor %}
          </table>
@@ -41,8 +43,9 @@
                <select name="filter" class="filter-by">
                   <option value="user">Usuario</option>
                   <option value="tema">Tema</option>
+                  <option value="pais">País</option>
               </select>
-              <input type="text" name="text">
+              <input type="text" name="text" placeholder="Ingrese texto a filtrar...">
               <input type="submit" value="Filtrar" class="button">
             </fieldset>
          </form>
