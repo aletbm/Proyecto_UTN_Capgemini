@@ -142,4 +142,5 @@
 
 #mtv{
     width: 50%;
+    max-height: 300px;
 }
