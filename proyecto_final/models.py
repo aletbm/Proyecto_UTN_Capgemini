@@ -71,9 +71,10 @@ class TP():
     
     def filterByTema(self,text):
         query = f""" 
-                    SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema FROM usuario
+                    SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema, countries.name FROM usuario
                     JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario
                     JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema
+                    JOIN countries ON countries.idCountries = usuario.countries_idCountries
                     where tema.Tema = "{ text }"
                     order by  puntuacionmax.puntuacion desc
                     """
@@ -87,9 +88,10 @@ class TP():
     
     def filterByUser(self,text):
         query  = f"""
-                    SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema FROM usuario
+                    SELECT usuario.nombre, puntuacionmax.puntuacion, puntuacionmax.fecha, tema.Tema, countries.name FROM usuario
                     JOIN puntuacionmax ON usuario.idUsuario = puntuacionmax.Usuario_idUsuario
                     JOIN tema ON tema.idTema = puntuacionmax.Tema_idTema
+                    JOIN countries ON countries.idCountries = usuario.countries_idCountries
                     where usuario.nombre = "{ text }" 
                     order by  puntuacionmax.puntuacion desc
                     """
