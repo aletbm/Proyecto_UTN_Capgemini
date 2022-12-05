@@ -26,10 +26,8 @@ def saveHistorial(request):
     path = f'./static/game/logs/{request.user.nombre}.json'
     data = {}
     dataOld = False
-    mode = "a"
     
     if exists(path):
-        mode = "w"
         with open(path, 'rb') as jsonFile:
             try:
                 dataOld = json.load(jsonFile)
@@ -39,7 +37,7 @@ def saveHistorial(request):
             except JSONDecodeError:
                 pass
         
-    with open(path, mode) as jsonFile:
+    with open(path, "w") as jsonFile:
         data["idGame"] = request.session["idGame"]
         data["date"] = str(dt.datetime.now())
         data["tema"] = request.session["tema"]

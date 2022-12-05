@@ -4,3 +4,4 @@ db.sqlite3
 proyecto_final/cfgDB.py
 proyecto_final/__pycache__
 __pycache__
+static/game/logs/*.json
