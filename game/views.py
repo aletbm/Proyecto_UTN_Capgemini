@@ -6,46 +6,15 @@ from django.core.serializers.json import DjangoJSONEncoder
 from random import randint, seed
 import datetime as dt
 import json
-from json.decoder import JSONDecodeError
-from os.path import exists
 import time
 from .video import VideoCamera, streamVideo
-from .utils import readCountInTxt, timer
+from .utils import readCountInTxt, timer, saveHistorial
 from proyecto_final.models import db
 from uuid import uuid4
 
 seed(42)
 
 
-def event_stream(request):
-    while True:
-        submit = False
-
-        fingerCount, manoCerrada = readCountInTxt("./static/game/fingerCount.txt")
-
-        if manoCerrada is False:
-            request.session["nowSubmit"] = True
-        elif manoCerrada is True and request.session["nowSubmit"] is True:
-            submit = True
-        else:
-            request.session["nowSubmit"] = False
-            submit = False
-
-        data = json.dumps(
-            [
-                fingerCount,
-                request.session["question"],
-                request.session["options"],
-                submit,
-                str(timer(request.session["timeStart"], 3, 1)),
-            ],
-            cls=DjangoJSONEncoder,
-        )
-        yield "\ndata: {}\n\n".format(data)
-        time.sleep(0.5)
-
-
-# ==================== VISTAS ====================
 def getPreguntas(request):
     preguntas = []
     for p in db.getPreguntas(request.session["tema"]):
@@ -87,6 +56,45 @@ def loadPregunta(request):
     return
 
 
+def validarPuntuacionMax(request):
+    puntaje = request.session["points"]
+    tema = request.session["tema"]
+    user = request.user.nombre
+    puntajeMax = db.obtenerPuntajeMax(tema,user)
+    if puntajeMax[0] == -1:
+        db.insertarPuntajeMax(tema,user,puntaje)
+    if puntajeMax[0] < puntaje:
+        db.modificarPuntajeMax(tema,user,puntaje)
+    return
+
+def event_stream(request):
+    while True:
+        submit = False
+
+        fingerCount, manoCerrada = readCountInTxt("./static/game/fingerCount.txt")
+
+        if manoCerrada is False:
+            request.session["nowSubmit"] = True
+        elif manoCerrada is True and request.session["nowSubmit"] is True:
+            submit = True
+        else:
+            request.session["nowSubmit"] = False
+            submit = False
+
+        data = json.dumps(
+            [
+                fingerCount,
+                request.session["question"],
+                request.session["options"],
+                submit,
+                str(timer(request.session["timeStart"], 3, 1)),
+            ],
+            cls=DjangoJSONEncoder,
+        )
+        yield "\ndata: {}\n\n".format(data)
+        time.sleep(0.5)
+
+# ==================== VISTAS ====================
 @gzip.gzip_page
 def game(request):
     if not request.user.is_authenticated:
@@ -136,51 +144,6 @@ def resultado(request):
             "puntuacion": request.session["points"],
         },
     )
-
-
-def validarPuntuacionMax(request):
-    puntaje = request.session["points"]
-    tema = request.session["tema"]
-    user = request.user.nombre
-    puntajeMax = db.obtenerPuntajeMax(tema,user)
-    if puntajeMax[0] == -1:
-        db.insertarPuntajeMax(tema,user,puntaje)
-    if puntajeMax[0] < puntaje:
-        db.modificarPuntajeMax(tema,user,puntaje)
-    return
-
-
-def saveHistorial(request):
-    path = f'./static/game/logs/{request.user.nombre}.json'
-    data = {}
-    dataOld = False
-    mode = "a"
-    
-    if exists(path):
-        mode = "w"
-        with open(path, 'rb') as jsonFile:
-            try:
-                dataOld = json.load(jsonFile)
-                for row in dataOld:
-                    if row["idGame"] == request.session["idGame"]:
-                        return
-            except JSONDecodeError:
-                pass
-        
-    with open(path, mode) as jsonFile:
-        data["idGame"] = request.session["idGame"]
-        data["date"] = str(dt.datetime.now())
-        data["tema"] = request.session["tema"]
-        data["cantidad"] = len(request.session["contestadas"])
-        data["jugadas"] = request.session["contestadas"]
-        data["puntaje"] = request.session["points"]
-        if dataOld:
-            dataOld.append(data)
-        else:
-            dataOld = [data]
-        json.dump(dataOld, jsonFile, indent=4)
-    return
-    
 
 def video(request):
     cam = VideoCamera()

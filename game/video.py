@@ -2,7 +2,6 @@ import cv2
 import threading
 import mediapipe as mp
 
-
 class VideoCamera(object):
     def __init__(self):
         self.finger_count = 0

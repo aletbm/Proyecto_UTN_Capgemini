@@ -1,4 +1,7 @@
 import datetime as dt
+import json
+from json.decoder import JSONDecodeError
+from os.path import exists
 
 def readCountInTxt(path):
     with open(path, "r") as file:
@@ -17,3 +20,35 @@ def readCountInTxt(path):
 def timer(start, m, s):
     timeEnd = dt.datetime.strptime(start, "%Y-%m-%d %H:%M:%S.%f") + dt.timedelta(minutes=m, seconds=s)
     return timeEnd - dt.datetime.now()
+
+
+def saveHistorial(request):
+    path = f'./static/game/logs/{request.user.nombre}.json'
+    data = {}
+    dataOld = False
+    mode = "a"
+    
+    if exists(path):
+        mode = "w"
+        with open(path, 'rb') as jsonFile:
+            try:
+                dataOld = json.load(jsonFile)
+                for row in dataOld:
+                    if row["idGame"] == request.session["idGame"]:
+                        return
+            except JSONDecodeError:
+                pass
+        
+    with open(path, mode) as jsonFile:
+        data["idGame"] = request.session["idGame"]
+        data["date"] = str(dt.datetime.now())
+        data["tema"] = request.session["tema"]
+        data["cantidad"] = len(request.session["contestadas"])
+        data["jugadas"] = request.session["contestadas"]
+        data["puntaje"] = request.session["points"]
+        if dataOld:
+            dataOld.append(data)
+        else:
+            dataOld = [data]
+        json.dump(dataOld, jsonFile, indent=4)
+    return   
