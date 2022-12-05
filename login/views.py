@@ -9,6 +9,7 @@ def index(request):
     context = {}
     if request.user.is_authenticated:
         return render(request, 'index.html')
+    
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():

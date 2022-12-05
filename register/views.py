@@ -6,8 +6,10 @@ from register.forms import RegisterForm
 
 def index(request):
     context = {}
+    
     if request.user.is_authenticated:
         return redirect('/')
+    
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():

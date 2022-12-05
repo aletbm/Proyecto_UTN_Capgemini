@@ -51,9 +51,7 @@ class VideoCamera(object):
 
             results = hands.process(frame_rgb)
             if results.multi_hand_landmarks is not None:
-                for (
-                    hand_landmarks
-                ) in results.multi_hand_landmarks:  # Cada mano tiene 21 landmarks
+                for hand_landmarks in results.multi_hand_landmarks:  # Cada mano tiene 21 landmarks
                     handIndex = results.multi_hand_landmarks.index(
                         hand_landmarks
                     )  # Identificador de mano

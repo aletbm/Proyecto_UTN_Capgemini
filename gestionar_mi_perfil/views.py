@@ -28,7 +28,7 @@ def updateNombreYCountry(request):
             db.updateNombreYCountry(username=request.POST['nombre'], country=request.POST['country'], oldUsername=oldUsername)
             login(request, user)
             messages.success(request, 'Datos actualizados correctamente')
-            redirect('/')
+            return redirect('/gestionar_mi_perfil/')
     else:
         form = UpdateCustomUserData(
             initial={
@@ -52,7 +52,7 @@ def updateContrasenia(request):
             db.updateContrasenia(username=request.user.nombre, password=request.POST['new_password1'])
             login(request, user)
             messages.success(request, 'Contraseña actualizada correctamente')
-            redirect('/')
+            return redirect('/gestionar_mi_perfil/')
     else:
         form = UpdateCustomUserPassword(user=request.user)
     context['form'] = form
