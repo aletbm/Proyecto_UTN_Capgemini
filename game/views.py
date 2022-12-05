@@ -103,7 +103,8 @@ def game(request):
         return redirect("/login")
     
     if request.POST:
-        if int(request.POST["answer"]) != 0:
+        print(request.POST["answer"])
+        if int(request.POST["answer"]) != 0 and (int(request.POST["answer"]) - 1) < len(request.session["options"]):
             request.session["contestadas"].append(
                 {
                     "pregunta": request.session["question"],
