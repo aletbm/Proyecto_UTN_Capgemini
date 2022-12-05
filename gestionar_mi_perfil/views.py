@@ -23,8 +23,10 @@ def updateNombreYCountry(request):
     if request.POST:
         form = UpdateCustomUserData(request.POST, instance=request.user)
         if form.is_valid():
-            form.save()
+            user = form.save()
             db.updateNombreYCountry(username=request.POST['nombre'], country=request.POST['country'])
+            login(request, user)
+            messages.success(request, 'Datos actualizados correctamente')
             redirect('/')
     else:
         form = UpdateCustomUserData(
